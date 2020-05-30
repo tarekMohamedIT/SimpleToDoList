@@ -5,7 +5,7 @@ using ToDoList.Core.Persistence.DataProviders;
 
 namespace ToDoList.WindowsFormApp
 {
-	public class MockNotesProvider : IProvider<Note>
+	public class MockNotesProvider : IDataProvider<Note>
 	{
 		public IEnumerable<Note> Query => _table;
 		public IEnumerable<Note> ReadOnlyQuery => _table;

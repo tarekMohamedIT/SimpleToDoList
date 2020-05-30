@@ -8,9 +8,9 @@ namespace ToDoList.Core.Persistence.Repositories.Concrete
 {
 	public class BaseMemoryRepository<T> : IRepository<T> where T : IEntity
 	{
-		private IProvider<T> _provider;
+		private IDataProvider<T> _provider;
 
-		public BaseMemoryRepository(IProvider<T> provider)
+		public BaseMemoryRepository(IDataProvider<T> provider)
 		{
 			this._provider = provider;
 			_table = _provider != null ? _provider.ReadOnlyQuery as List<T> : new List<T>();

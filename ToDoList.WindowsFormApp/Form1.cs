@@ -17,7 +17,7 @@ namespace ToDoList.WindowsFormApp
 	public partial class Form1 : Form
 	{
 		private IRepository<Note> _notesRepository;
-		private IProvider<Note> _noteProvider;
+		private IDataProvider<Note> _noteProvider;
 
 		public Form1()
 		{

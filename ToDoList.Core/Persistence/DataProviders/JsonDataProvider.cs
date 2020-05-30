@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace ToDoList.Core.Persistence.DataProviders
 {
-	public class JsonDataProvider<T> : IProvider<T>
+	public class JsonDataProvider<T> : IDataProvider<T>
 	{
 		public IEnumerable<T> Query => _table;
 

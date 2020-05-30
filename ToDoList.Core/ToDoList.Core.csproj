@@ -73,7 +73,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\Note.cs" />
-    <Compile Include="Persistence\DataProviders\IProvider.cs" />
+    <Compile Include="Persistence\DataProviders\IDataProvider.cs" />
     <Compile Include="Persistence\DataProviders\JsonDataProvider.cs" />
     <Compile Include="Persistence\Repositories\Concrete\BaseMemoryRepository.cs" />
     <Compile Include="Persistence\Repositories\IEFRepository.cs" />
