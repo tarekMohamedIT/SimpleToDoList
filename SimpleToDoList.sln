@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1022
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Core", "ToDoList.Core\ToDoList.Core.csproj", "{8E2A3242-3248-4CF7-AAFA-807048F55358}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.WindowsFormApp", "ToDoList.WindowsFormApp\ToDoList.WindowsFormApp.csproj", "{7741F7E8-523D-4377-804D-B7C902401861}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8E2A3242-3248-4CF7-AAFA-807048F55358} = {8E2A3242-3248-4CF7-AAFA-807048F55358}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E2A3242-3248-4CF7-AAFA-807048F55358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E2A3242-3248-4CF7-AAFA-807048F55358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E2A3242-3248-4CF7-AAFA-807048F55358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E2A3242-3248-4CF7-AAFA-807048F55358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7741F7E8-523D-4377-804D-B7C902401861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7741F7E8-523D-4377-804D-B7C902401861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7741F7E8-523D-4377-804D-B7C902401861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7741F7E8-523D-4377-804D-B7C902401861}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC400106-381A-49FB-BB09-78E9E4B043C4}
+	EndGlobalSection
+EndGlobal
