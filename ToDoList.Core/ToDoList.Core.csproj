@@ -70,7 +70,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Persistence\DataProviders\IDataProvider.cs" />
