@@ -10,6 +10,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.WindowsFormApp", "
 		{8E2A3242-3248-4CF7-AAFA-807048F55358} = {8E2A3242-3248-4CF7-AAFA-807048F55358}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.TestConsole", "ToDoList.TestConsole\ToDoList.TestConsole.csproj", "{3D97211B-7EA8-41EA-B937-182FD9D15FE4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8E2A3242-3248-4CF7-AAFA-807048F55358} = {8E2A3242-3248-4CF7-AAFA-807048F55358}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +29,10 @@ Global
 		{7741F7E8-523D-4377-804D-B7C902401861}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7741F7E8-523D-4377-804D-B7C902401861}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7741F7E8-523D-4377-804D-B7C902401861}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D97211B-7EA8-41EA-B937-182FD9D15FE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D97211B-7EA8-41EA-B937-182FD9D15FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D97211B-7EA8-41EA-B937-182FD9D15FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D97211B-7EA8-41EA-B937-182FD9D15FE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
