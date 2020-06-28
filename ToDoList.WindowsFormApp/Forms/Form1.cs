@@ -27,9 +27,10 @@ namespace ToDoList.WindowsFormApp.Forms
 			_notesRepository = new BaseMemoryRepository<BaseNote>(_noteProvider);
 
 			var notesList = _notesRepository.Table.ToList();
+			int count = 0;
 			foreach (var note in notesList)
 			{
-				listBox1.Items.Add(note.CreationDate.ToString("yyyy/MM/dd HH:mm:ss"));
+				listBox1.Items.Add((count++).ToString("D5"));
 			}
 
 			if (notesList.Count > 0)
@@ -65,7 +66,7 @@ namespace ToDoList.WindowsFormApp.Forms
 			var note = NotesFactory.Create(addForm.selectedItem, listBox1.SelectedIndex + 1);
 
 			_notesRepository.Insert(note);
-			listBox1.Items.Add(note.CreationDate.ToString("yyyy/MM/dd HH:mm:ss"));
+			listBox1.Items.Add(note.Id.ToString("D5"));
 			listBox1.SelectedIndex = note.Id;
 		}
 	}
