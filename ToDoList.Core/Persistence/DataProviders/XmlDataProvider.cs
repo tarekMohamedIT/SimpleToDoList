@@ -32,7 +32,7 @@ namespace ToDoList.Core.Persistence.DataProviders
 		{
 			using (var writer = XmlWriter.Create(_filePath))
 			{
-				XmlSerializer xs = new XmlSerializer(typeof(T), _knownTypes);
+				XmlSerializer xs = new XmlSerializer(typeof(List<T>), _knownTypes);
 				xs.Serialize(writer, _table);
 			}
 		}
