@@ -16,8 +16,5 @@ namespace ToDoList.Core.Models
 		{
 			return null;
 		}
-
-		public abstract void ReadXml(XmlReader reader);
-		public abstract void WriteXml(XmlWriter writer);
 	}
 }

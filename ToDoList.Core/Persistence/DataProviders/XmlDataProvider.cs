@@ -5,7 +5,6 @@ using System.Text.Json;
 using System.Xml;
 using System.Xml.Serialization;
 using ToDoList.Core.Models;
-using ToDoList.Core.Utilities;
 
 namespace ToDoList.Core.Persistence.DataProviders
 {
@@ -33,7 +32,8 @@ namespace ToDoList.Core.Persistence.DataProviders
 		{
 			using (var writer = XmlWriter.Create(_filePath))
 			{
-				XmlGenericSerializer.Serialize(this._table, writer, _knownTypes);
+				XmlSerializer xs = new XmlSerializer(typeof(T), _knownTypes);
+				xs.Serialize(writer, _table);
 			}
 		}
 
