@@ -37,13 +37,17 @@ namespace ToDoList.Core.Persistence.Repositories.Concrete
 
 		public void Insert(T entity)
 		{
+			if (entity.Id == 0)
+				entity.Id = GetNextId();
 			_table.Add(entity);
 		}
 
 		public void Insert(IEnumerable<T> entities)
 		{
-			_table.AddRange(entities);
-			_provider.Save();
+			foreach (var entity in entities)
+			{
+				Insert(entity);
+			}
 		}
 
 		public void Update(T entity)
@@ -77,6 +81,11 @@ namespace ToDoList.Core.Persistence.Repositories.Concrete
 		public void Delete(IEnumerable<T> entities)
 		{
 			_table.RemoveAll(entities.Contains);
+		}
+
+		private int GetNextId()
+		{
+			return _table.Count;
 		}
 	}
 }

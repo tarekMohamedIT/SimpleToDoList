@@ -41,8 +41,7 @@ namespace ToDoList.WindowsFormApp.Forms
 		{
 			var note = _notesRepository.Table.ToList()[listBox1.SelectedIndex];
 
-			_currentNoteViewModel = NotesFactory.Create(note);
-
+			_currentNoteViewModel = NotesFactory.CreateViewModel(note);
 			_currentNoteViewModel.InitControl(flowLayoutPanel1);
 
 			label3.Text = $@"Date : {note.CreationDate:yyyy/MM/dd HH:mm:ss}";
@@ -50,10 +49,6 @@ namespace ToDoList.WindowsFormApp.Forms
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			//var note = _notesRepository.Table.ToList()[listBox1.SelectedIndex];
-			//note.Name = textBox1.Text;
-			//note.Text = textBox2.Text;
-
 			_notesRepository.Update(_currentNoteViewModel.Entity as BaseNote);
 			_noteProvider.Save();
 		}
@@ -63,7 +58,7 @@ namespace ToDoList.WindowsFormApp.Forms
 			var addForm = new SelectNoteTypeForm();
 			addForm.ShowDialog();
 
-			var note = NotesFactory.Create(addForm.selectedItem, listBox1.SelectedIndex + 1);
+			var note = NotesFactory.CreateNoteModel(addForm.selectedItem);
 
 			_notesRepository.Insert(note);
 			listBox1.Items.Add(note.Id.ToString("D5"));
