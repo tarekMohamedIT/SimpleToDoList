@@ -6,7 +6,7 @@ namespace ToDoList.WindowsFormApp.ViewModels
 {
 	public class NotesFactory
 	{
-		public static INoteViewModel<TEntity> Create<TEntity>(TEntity entity)
+		public static INoteViewModel<TEntity> CreateViewModel<TEntity>(TEntity entity)
 		{
 			if (entity is CheckList)
 				return new CheckListViewModel() { Entity = entity as CheckList } as INoteViewModel<TEntity>;
@@ -14,14 +14,14 @@ namespace ToDoList.WindowsFormApp.ViewModels
 			return new SimpleNoteViewModel() { Entity = entity as Note } as INoteViewModel<TEntity>;
 		}
 
-		public static BaseNote Create(string noteType, int id)
+		public static BaseNote CreateNoteModel(string noteType)
 		{
 			BaseNote note;
 
 			if (noteType == "Check List")
 				note = new CheckList()
 				{
-					Id = id,
+					Id = 0,
 					CreationDate = DateTime.Now,
 					Items = new List<ChecklistItem>()
 				};
@@ -29,7 +29,7 @@ namespace ToDoList.WindowsFormApp.ViewModels
 			else
 				note = new Note()
 				{
-					Id = id,
+					Id = 0,
 					CreationDate = DateTime.Now,
 				};
 
