@@ -38,7 +38,10 @@ namespace ToDoList.WindowsFormApp.ViewModels
 
 		public CheckListViewModel()
 		{
-			_checkListControl = new CheckedListBox();
+			_checkListControl = new CheckedListBox()
+			{
+				Width = 610
+			};
 		}
 
 		public override void InitControl(Control container)
