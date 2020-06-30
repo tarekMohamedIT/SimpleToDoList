@@ -81,7 +81,6 @@
     <Compile Include="Persistence\DataProviders\IDataProvider.cs" />
     <Compile Include="Persistence\DataProviders\JsonDataProvider.cs" />
     <Compile Include="Persistence\DataProviders\XmlDataProvider.cs" />
-    <Compile Include="Persistence\JsonConverters\BaseClassConverter.cs" />
     <Compile Include="Persistence\Repositories\Concrete\BaseMemoryRepository.cs" />
     <Compile Include="Persistence\Repositories\IEFRepository.cs" />
     <Compile Include="Persistence\Repositories\IRepository.cs" />
