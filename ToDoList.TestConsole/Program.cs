@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToDoList.Core.Models;
 using ToDoList.Core.Persistence.DataProviders;
 using ToDoList.Core.Persistence.Repositories.Concrete;
@@ -13,13 +10,17 @@ namespace ToDoList.TestConsole
 	{
 		static void Main(string[] args)
 		{
-			var xmlProvider = new XmlDataProvider<BaseNote>("notes.xml", new[]
-			{
-				typeof(Note),
-				typeof(CheckList)
-			});
+			IDataProvider<BaseNote> dataProvider;
 
-			var repo = new BaseMemoryRepository<BaseNote>(xmlProvider);
+			//dataProvider = new XmlDataProvider<BaseNote>("notesConsole.xml", new[]
+			//{
+			//	typeof(Note),
+			//	typeof(CheckList)
+			//}, new ConsoleLogger());
+
+			dataProvider = new JsonDataProvider<BaseNote>("notesConsole.json", new ConsoleLogger());
+
+			var repo = new BaseMemoryRepository<BaseNote>(dataProvider);
 
 			repo.Insert(new Note()
 			{
@@ -50,7 +51,7 @@ namespace ToDoList.TestConsole
 				}
 			});
 
-			xmlProvider.Save();
+			dataProvider.Save();
 
 			Console.Write("Text completed");
 			Console.Read();

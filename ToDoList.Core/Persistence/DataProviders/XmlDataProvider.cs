@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Xml;
 using System.Xml.Serialization;
 using ToDoList.Core.Models;
+using ToDoList.Core.Utilities;
 
 namespace ToDoList.Core.Persistence.DataProviders
 {
@@ -13,14 +14,16 @@ namespace ToDoList.Core.Persistence.DataProviders
 		public IEnumerable<T> Query => _table;
 		public IEnumerable<T> ReadOnlyQuery => _table;
 
-		private string _filePath;
+		private readonly string _filePath;
 		private List<T> _table;
-		private Type[] _knownTypes;
+		private readonly Type[] _knownTypes;
+		private readonly ILogger _logger;
 
-		public XmlDataProvider(string filePath, Type[] knownTypes)
+		public XmlDataProvider(string filePath, Type[] knownTypes, ILogger logger = null)
 		{
 			this._filePath = filePath;
 			this._knownTypes = knownTypes;
+			this._logger = logger;
 			LoadAll();
 		}
 
@@ -30,10 +33,18 @@ namespace ToDoList.Core.Persistence.DataProviders
 
 		public void Save()
 		{
-			using (var writer = XmlWriter.Create(_filePath))
+			try
 			{
-				XmlSerializer xs = new XmlSerializer(typeof(List<T>), _knownTypes);
-				xs.Serialize(writer, _table);
+				using (var writer = XmlWriter.Create(_filePath))
+				{
+					XmlSerializer xs = new XmlSerializer(typeof(List<T>), _knownTypes);
+					xs.Serialize(writer, _table);
+				}
+				_logger?.Log("Data saved successfully");
+			}
+			catch (Exception e)
+			{
+				_logger?.Log(e);
 			}
 		}
 
@@ -46,11 +57,13 @@ namespace ToDoList.Core.Persistence.DataProviders
 
 					var xs = new XmlSerializer(typeof(List<T>), _knownTypes);
 					_table = xs.Deserialize(fileStream) as List<T>;
-
 				}
+
+				_logger?.Log("Data loaded successfully");
 			}
 			catch (Exception e)
 			{
+				_logger?.Log(e);
 				_table = new List<T>();
 			}
 		}
