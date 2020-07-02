@@ -78,6 +78,16 @@ namespace ToDoList.WindowsFormApp.ViewModels
 				Text = "Remove selected"
 			};
 
+			var moveUpButton = new Button()
+			{
+				Text = "Move Up"
+			};
+
+			var moveDownButton = new Button()
+			{
+				Text = "Move Down"
+			};
+
 			_checkListControl.SelectedIndexChanged += (sender, args) =>
 			{
 				if (_checkListControl.SelectedItem != null)
@@ -102,9 +112,35 @@ namespace ToDoList.WindowsFormApp.ViewModels
 				checkTextBox.Text = "";
 			};
 
+			moveUpButton.Click += (sender, args) =>
+			{
+				var selectedIndex = _checkListControl.SelectedIndex;
+
+				if (selectedIndex == 0) return;
+				var selectedItem = _checkListControl.SelectedItem;
+
+				_checkListControl.Items.Remove(selectedItem);
+				_checkListControl.Items.Insert(selectedIndex - 1, selectedItem);
+				_checkListControl.SelectedIndex = selectedIndex - 1;
+			};
+
+			moveDownButton.Click += (sender, args) =>
+			{
+				var selectedIndex = _checkListControl.SelectedIndex;
+
+				if (selectedIndex == _checkListControl.Items.Count - 1) return;
+				var selectedItem = _checkListControl.SelectedItem;
+
+				_checkListControl.Items.Remove(selectedItem);
+				_checkListControl.Items.Insert(selectedIndex + 1, selectedItem);
+				_checkListControl.SelectedIndex = selectedIndex + 1;
+			};
+
 			container.Controls.Add(checkTextBox);
 			container.Controls.Add(saveNoteButton);
 			container.Controls.Add(addNewButton);
+			container.Controls.Add(moveUpButton);
+			container.Controls.Add(moveDownButton);
 			container.Controls.Add(removeSelectedButton);
 		}
 	}
