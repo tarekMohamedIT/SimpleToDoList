@@ -58,7 +58,10 @@ namespace ToDoList.WindowsFormApp.ViewModels
 			}
 
 			container.Controls.Add(_checkListControl);
-			var checkTextBox = new TextBox();
+			var checkTextBox = new TextBox()
+			{
+				Width = 610
+			};
 
 			var saveNoteButton = new Button()
 			{
