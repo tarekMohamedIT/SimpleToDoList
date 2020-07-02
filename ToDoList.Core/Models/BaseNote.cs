@@ -11,10 +11,5 @@ namespace ToDoList.Core.Models
 		public int Id { get; set; }
 		public string Title { get; set; }
 		public DateTime CreationDate { get; set; }
-
-		public XmlSchema GetSchema()
-		{
-			return null;
-		}
 	}
 }
