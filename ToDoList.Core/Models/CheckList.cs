@@ -7,6 +7,9 @@ namespace ToDoList.Core.Models
 {
 	public class CheckList : BaseNote
 	{
+		/// <summary>
+		/// The items list of this checklist
+		/// </summary>
 		public List<ChecklistItem> Items { get; set; }
 	}
 }
