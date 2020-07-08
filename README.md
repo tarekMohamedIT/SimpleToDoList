@@ -16,7 +16,7 @@ This simple C# application aims to enhance C# developers' skills and knowledge b
 * A generic [IRepository] to provide a unified way for inserting, updating and deleting data items 
   * You can create your own specific repository by exteding the [BaseMemoryRepository]
   
-#Extensions to be implemented
+# Extensions to be implemented
 
 You can add more features to this project like :
 * A Simple ASP .NET UI project serves as a server-side notes tracking application and an API to access it.
@@ -24,7 +24,7 @@ You can add more features to this project like :
 * A new implementation of IDataProvider using EntityFramework or Microsoft Access (Even MongoDB or My SQL ?)
 * Notes' categories, serves as a notenook with a list of notes in it.
 
-#Final Thoughts
+# Final Thoughts
 I 've built this project to be my own personal playground to test new ideas and explore the extend of my knowledge, even applying new principles learned during long hours
 of research and trial-and-error.
 
