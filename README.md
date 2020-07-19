@@ -15,6 +15,8 @@ This simple C# application aims to enhance C# developers' skills and knowledge b
   *There are currently 2 implementations for this interface: [XmlDataProvider] and [JsonDataProvider]
 * A generic [IRepository] to provide a unified way for inserting, updating and deleting data items 
   * You can create your own specific repository by exteding the [BaseMemoryRepository]
+* \[NEW\] A sub menu system for adding new features to the windows form project.
+* \[NEW\] A theme mechanism for the windows form project, You can create and update your own themes for the notes application.
   
 # Extensions to be implemented
 
