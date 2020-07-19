@@ -15,12 +15,12 @@ namespace ToDoList.Core.Persistence.Repositories.Concrete
 		/// <summary>
 		/// An instance of the data provider is used to load/save data.
 		/// </summary>
-		private IDataProvider<T> _provider;
+		private IDataProvider<List<T>> _provider;
 
-		public BaseMemoryRepository(IDataProvider<T> provider)
+		public BaseMemoryRepository(IDataProvider<List<T>> provider)
 		{
 			this._provider = provider;
-			_table = _provider != null ? _provider.ReadOnlyQuery as List<T> : new List<T>();
+			_table = _provider != null ? _provider.Load() : new List<T>();
 		}
 
 		/// <summary>
@@ -32,7 +32,7 @@ namespace ToDoList.Core.Persistence.Repositories.Concrete
 			{
 				if (_table == null)
 				{
-					_table = _provider != null ? _provider.ReadOnlyQuery as List<T> : new List<T>();
+					_table = _provider != null ? _provider.Load() : new List<T>();
 				}
 
 				return _table.AsQueryable();

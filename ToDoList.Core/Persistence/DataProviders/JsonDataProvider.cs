@@ -14,15 +14,11 @@ namespace ToDoList.Core.Persistence.DataProviders
 	/// </typeparam>
 	public class JsonDataProvider<T> : IDataProvider<T>
 	{
-		/// <inheritdoc/>
-		public IEnumerable<T> Query => _table;
-
-		/// <inheritdoc/>
-		public IEnumerable<T> ReadOnlyQuery => _table;
 
 		private readonly string _filePath;
-		private List<T> _table; //List<T> instead of IEnumerable<T> for Serialization/Deserialization
+		public T Item { get; set; } //List<T> instead of IEnumerable<T> for Serialization/Deserialization
 		private readonly ILogger _logger;
+		private bool _isLoaded = false;
 
 		/// <summary>
 		/// A constructor for the JsonDataProvider with a file path and an optional logger
@@ -33,7 +29,7 @@ namespace ToDoList.Core.Persistence.DataProviders
 		{
 			this._filePath = filePath;
 			this._logger = logger;
-			LoadAll();
+			Load();
 		}
 
 		/// <inheritdoc/>
@@ -41,7 +37,7 @@ namespace ToDoList.Core.Persistence.DataProviders
 		{
 			try
 			{
-				var jsonString = JsonConvert.SerializeObject(_table, Formatting.Indented, new JsonSerializerSettings
+				var jsonString = JsonConvert.SerializeObject(Item, Formatting.Indented, new JsonSerializerSettings
 				{
 					TypeNameHandling = TypeNameHandling.All
 				});
@@ -64,11 +60,14 @@ namespace ToDoList.Core.Persistence.DataProviders
 		/// <summary>
 		/// A method for loading all the items from the file when constructing this class.
 		/// </summary>
-		private void LoadAll()
+		public T Load()
 		{
+			if (_isLoaded) return Item;
+			_isLoaded = true;
+
 			try
 			{
-				_table = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(_filePath), new JsonSerializerSettings
+				Item = JsonConvert.DeserializeObject<T>(File.ReadAllText(_filePath), new JsonSerializerSettings
 				{
 					TypeNameHandling = TypeNameHandling.All
 				});
@@ -77,8 +76,10 @@ namespace ToDoList.Core.Persistence.DataProviders
 			catch (Exception e)
 			{
 				_logger?.Log(e);
-				_table = new List<T>();
+				Item = default(T);
 			}
+
+			return Item;
 		}
 	}
 }

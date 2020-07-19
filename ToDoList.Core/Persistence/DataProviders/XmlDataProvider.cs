@@ -17,16 +17,12 @@ namespace ToDoList.Core.Persistence.DataProviders
 	/// </typeparam>
 	public class XmlDataProvider<T> : IDataProvider<T>
 	{
-		/// <inheritdoc/>
-		public IEnumerable<T> Query => _table;
-
-		/// <inheritdoc/>
-		public IEnumerable<T> ReadOnlyQuery => _table;
-
+		
 		private readonly string _filePath;
-		private List<T> _table; //List<T> instead of IEnumerable<T> for Serialization/Deserialization
+		public T Item { get; set; } //List<T> instead of IEnumerable<T> for Serialization/Deserialization
 		private readonly Type[] _knownTypes;
 		private readonly ILogger _logger;
+		private bool _isLoaded = false;
 
 		/// <summary>
 		/// A constructor for the XmlDataProvider with a file path and an optional logger
@@ -39,7 +35,7 @@ namespace ToDoList.Core.Persistence.DataProviders
 			this._filePath = filePath;
 			this._knownTypes = knownTypes;
 			this._logger = logger;
-			LoadAll();
+			Load();
 		}
 
 		public void Dispose()
@@ -53,8 +49,8 @@ namespace ToDoList.Core.Persistence.DataProviders
 			{
 				using (var writer = XmlWriter.Create(_filePath))
 				{
-					XmlSerializer xs = new XmlSerializer(typeof(List<T>), _knownTypes);
-					xs.Serialize(writer, _table);
+					XmlSerializer xs = new XmlSerializer(typeof(T), _knownTypes);
+					xs.Serialize(writer, Item);
 				}
 				_logger?.Log("Data saved successfully");
 			}
@@ -67,15 +63,17 @@ namespace ToDoList.Core.Persistence.DataProviders
 		/// <summary>
 		/// A method for loading all the items from the file when constructing this class.
 		/// </summary>
-		private void LoadAll()
+		public T Load()
 		{
+			if (_isLoaded) return Item;
+			_isLoaded = true;
 			try
 			{
 				using (var fileStream = new FileStream(_filePath, FileMode.Open))
 				{
 
-					var xs = new XmlSerializer(typeof(List<T>), _knownTypes);
-					_table = xs.Deserialize(fileStream) as List<T>;
+					var xs = new XmlSerializer(typeof(T), _knownTypes);
+					Item = (T) xs.Deserialize(fileStream);
 				}
 
 				_logger?.Log("Data loaded successfully");
@@ -83,8 +81,10 @@ namespace ToDoList.Core.Persistence.DataProviders
 			catch (Exception e)
 			{
 				_logger?.Log(e);
-				_table = new List<T>();
+				Item = default(T);
 			}
+
+			return Item;
 		}
 	}
 }
