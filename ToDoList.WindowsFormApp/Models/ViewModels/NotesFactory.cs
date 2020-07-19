@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ToDoList.Core.Models;
 
-namespace ToDoList.WindowsFormApp.ViewModels
+namespace ToDoList.WindowsFormApp.Models.ViewModels
 {
 	public class NotesFactory
 	{

@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
-using ToDoList.Core.Models;
 
-namespace ToDoList.WindowsFormApp.ViewModels
+namespace ToDoList.WindowsFormApp.Models.ViewModels
 {
 	public abstract class BaseNoteViewModel<TEntity> : INoteViewModel<TEntity>
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace ToDoList.WindowsFormApp.ViewModels
+namespace ToDoList.WindowsFormApp.Models.ViewModels
 {
 	public interface INoteViewModel
 	{
