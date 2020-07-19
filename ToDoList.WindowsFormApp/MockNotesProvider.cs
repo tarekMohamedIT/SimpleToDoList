@@ -5,17 +5,24 @@ using ToDoList.Core.Persistence.DataProviders;
 
 namespace ToDoList.WindowsFormApp
 {
-	public class MockNotesProvider : IDataProvider<BaseNote>
+	public class MockNotesProvider : IDataProvider<List<BaseNote>>
 	{
-		public IEnumerable<BaseNote> Query => _table;
-		public IEnumerable<BaseNote> ReadOnlyQuery => _table;
 
-		private List<BaseNote> _table;
+		public List<BaseNote> Item { get; set; }
 
 		public MockNotesProvider()
 		{
 
-			_table = new List<BaseNote>(){
+			Item = Load();
+		}
+
+		public void Save()
+		{
+		}
+
+		public List<BaseNote> Load()
+		{
+			return new List<BaseNote>(){
 				new Note()
 				{
 					Id = 0,
@@ -26,28 +33,24 @@ namespace ToDoList.WindowsFormApp
 
 				new Note()
 				{
-				Id = 1,
-				Title = "A simple note",
-				Text = "Just a simple note",
-				CreationDate = DateTime.Now
-			},
+					Id = 1,
+					Title = "A simple note",
+					Text = "Just a simple note",
+					CreationDate = DateTime.Now
+				},
 
-			new CheckList()
-			{
-				Id = 2,
-				Title = "A simple note",
-				Items = new List<ChecklistItem>()
+				new CheckList()
 				{
-					new ChecklistItem(){Text = "Wake up", Checked = false},
-					new ChecklistItem(){Text = "Breakfast", Checked = false},
-					new ChecklistItem(){Text = "Workout", Checked = false},
-					new ChecklistItem(){Text = "Go to work", Checked = false}
-				}
-			}};
-		}
-
-		public void Save()
-		{
+					Id = 2,
+					Title = "A simple note",
+					Items = new List<ChecklistItem>()
+					{
+						new ChecklistItem(){Text = "Wake up", Checked = false},
+						new ChecklistItem(){Text = "Breakfast", Checked = false},
+						new ChecklistItem(){Text = "Workout", Checked = false},
+						new ChecklistItem(){Text = "Go to work", Checked = false}
+					}
+				}};
 		}
 
 		public void Dispose()
