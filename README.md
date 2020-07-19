@@ -21,10 +21,13 @@ This simple C# application aims to enhance C# developers' skills and knowledge b
 # Extensions to be implemented
 
 You can add more features to this project like :
-* A Simple ASP .NET UI project serves as a server-side notes tracking application and an API to access it.
+* Platforms extensions :
+ * A Simple ASP .NET UI project serves as a server-side notes tracking application and an API to access it.
+ * A Xamarin project for extending the project's features to Android and ios platforms.
+ * A WPF project for windows.
 * A User's specific notes list with a Login/Register pages.
 * A new implementation of IDataProvider using EntityFramework or Microsoft Access (Even MongoDB or My SQL ?)
-* Notes' categories, serves as a notenook with a list of notes in it.
+* Notes' categories, serves as a notebook with a list of notes in it.
 
 # Final Thoughts
 I 've built this project to be my own personal playground to test new ideas and explore the extend of my knowledge, even applying new principles learned during long hours
