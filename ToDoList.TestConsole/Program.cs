@@ -10,15 +10,15 @@ namespace ToDoList.TestConsole
 	{
 		static void Main(string[] args)
 		{
-			IDataProvider<BaseNote> dataProvider;
+			IDataProvider<List<BaseNote>> dataProvider;
 
-			//dataProvider = new XmlDataProvider<BaseNote>("notesConsole.xml", new[]
+			//dataProvider = new XmlDataProvider<List<BaseNote>>("notesConsole.xml", new[]
 			//{
 			//	typeof(Note),
 			//	typeof(CheckList)
 			//}, new ConsoleLogger());
 
-			dataProvider = new JsonDataProvider<BaseNote>("notesConsole.json", new ConsoleLogger());
+			dataProvider = new JsonDataProvider<List<BaseNote>>("notesConsole.json", new ConsoleLogger());
 
 			var repo = new BaseMemoryRepository<BaseNote>(dataProvider);
 
