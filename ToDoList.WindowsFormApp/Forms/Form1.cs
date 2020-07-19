@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using ToDoList.Core.Models;
@@ -6,20 +7,20 @@ using ToDoList.Core.Persistence.DataProviders;
 using ToDoList.Core.Persistence.Repositories;
 using ToDoList.Core.Persistence.Repositories.Concrete;
 using ToDoList.WindowsFormApp.Forms.Popups;
-using ToDoList.WindowsFormApp.ViewModels;
+using ToDoList.WindowsFormApp.Models.ViewModels;
 
 namespace ToDoList.WindowsFormApp.Forms
 {
 	public partial class Form1 : Form
 	{
 		private IRepository<BaseNote> _notesRepository;
-		private IDataProvider<BaseNote> _noteProvider;
+		private IDataProvider<List<BaseNote>> _noteProvider;
 		private INoteViewModel _currentNoteViewModel;
 
 		public Form1()
 		{
 			InitializeComponent();
-			_noteProvider = new XmlDataProvider<BaseNote>("notesList.xml", new Type[]
+			_noteProvider = new XmlDataProvider<List<BaseNote>>("notesList.xml", new Type[]
 			{
 				typeof(Note),
 				typeof(CheckList)
