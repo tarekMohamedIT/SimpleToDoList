@@ -75,6 +75,12 @@
     <Compile Include="Forms\Popups\SelectNoteTypeForm.Designer.cs">
       <DependentUpon>SelectNoteTypeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ThemesForms\CreateThemeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,7 @@
       <DependentUpon>ThemesIndexForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MockNotesProvider.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\SubMenuModels\OpenFormSubMenuModel.cs" />
     <Compile Include="Models\SubMenuModels\SubMenuModel.cs" />
     <Compile Include="Models\ThemeModel.cs" />
@@ -107,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Popups\SelectNoteTypeForm.resx">
       <DependentUpon>SelectNoteTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ThemesForms\CreateThemeForm.resx">
       <DependentUpon>CreateThemeForm.cs</DependentUpon>

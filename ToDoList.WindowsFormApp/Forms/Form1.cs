@@ -6,6 +6,7 @@ using ToDoList.Core.Models;
 using ToDoList.Core.Persistence.DataProviders;
 using ToDoList.Core.Persistence.Repositories;
 using ToDoList.Core.Persistence.Repositories.Concrete;
+using ToDoList.WindowsFormApp.Contexts;
 using ToDoList.WindowsFormApp.Forms.Popups;
 using ToDoList.WindowsFormApp.Models.ViewModels;
 
@@ -31,7 +32,11 @@ namespace ToDoList.WindowsFormApp.Forms
 			int count = 0;
 			foreach (var note in notesList)
 			{
-				listBox1.Items.Add((count++).ToString("D5"));
+				if (FormsContext.Instance.Settings.UseTitleForNotesList)
+					listBox1.Items.Add(note.Title);
+
+				else listBox1.Items.Add((count++).ToString("D5"));
+
 			}
 
 			if (notesList.Count > 0)

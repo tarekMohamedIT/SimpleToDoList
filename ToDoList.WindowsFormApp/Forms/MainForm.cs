@@ -26,6 +26,10 @@ namespace ToDoList.WindowsFormApp.Forms
 					modelsFactory.CreateOpenFormMenuModel("My Notes", (() => new Form1()), panelChildForm),
 					modelsFactory.CreateMainMenuModel("Settings", new List<SubMenuModel>()
 					{
+						modelsFactory.CreateOpenFormMenuModel("General",
+							() => new SettingsForm(), 
+							panelChildForm),
+
 						modelsFactory.CreateOpenFormMenuModel("Theme",
 							() => new ThemesIndexForm(),
 							panelChildForm),
