@@ -12,17 +12,22 @@ This simple C# application aims to enhance C# developers' skills and knowledge b
 * Well-documented Core project (tried to explain everything in it to my best effort).
 * An [IEntity] interface for all entities to inherit from (For database access).
 * An [IDataProvider] to provide a Save/Load mechanic for the repository pattern.
-  *There are currently 2 implementations for this interface: [XmlDataProvider] and [JsonDataProvider]
+  * There are currently 2 implementations for this interface: [XmlDataProvider] and [JsonDataProvider]
 * A generic [IRepository] to provide a unified way for inserting, updating and deleting data items 
   * You can create your own specific repository by exteding the [BaseMemoryRepository]
+* \[NEW\] A sub menu system for adding new features to the windows form project.
+* \[NEW\] A theme mechanism for the windows form project, You can create and update your own themes for the notes application.
   
 # Extensions to be implemented
 
 You can add more features to this project like :
-* A Simple ASP .NET UI project serves as a server-side notes tracking application and an API to access it.
+* Platforms extensions :
+  * A Simple ASP .NET UI project serves as a server-side notes tracking application and an API to access it.
+  * A Xamarin project for extending the project's features to Android and ios platforms.
+  * A WPF project for windows.
 * A User's specific notes list with a Login/Register pages.
 * A new implementation of IDataProvider using EntityFramework or Microsoft Access (Even MongoDB or My SQL ?)
-* Notes' categories, serves as a notenook with a list of notes in it.
+* Notes' categories, serves as a notebook with a list of notes in it.
 
 # Final Thoughts
 I 've built this project to be my own personal playground to test new ideas and explore the extend of my knowledge, even applying new principles learned during long hours
