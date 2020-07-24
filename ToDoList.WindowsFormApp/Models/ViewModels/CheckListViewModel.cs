@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using ToDoList.Core.Models;
 
 namespace ToDoList.WindowsFormApp.Models.ViewModels
@@ -56,31 +57,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 			{
 				Width = 610
 			};
-
-			var saveNoteButton = new Button()
-			{
-				Text = "Save note",
-			};
-
-			var addNewButton = new Button()
-			{
-				Text = "Add new"
-			};
-
-			var removeSelectedButton = new Button()
-			{
-				Text = "Remove selected"
-			};
-
-			var moveUpButton = new Button()
-			{
-				Text = "Move Up"
-			};
-
-			var moveDownButton = new Button()
-			{
-				Text = "Move Down"
-			};
+			container.Controls.Add(checkTextBox);
 
 			_checkListControl.SelectedIndexChanged += (sender, args) =>
 			{
@@ -88,54 +65,61 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 					checkTextBox.Text = _checkListControl.SelectedItem.ToString();
 			};
 
-			addNewButton.Click += (sender, args) =>
-			{
-				_checkListControl.Items.Add("New Item", CheckState.Unchecked);
-				_checkListControl.SelectedIndex = _checkListControl.Items.Count - 1;
-			};
+			InitCheckListButtons(container, checkTextBox);
+		}
 
-			saveNoteButton.Click += (sender, args) =>
+		private void InitCheckListButtons(Control container, TextBox checkTextBox)
+		{
+			InitButton(container, "Save note", (sender, args) =>
 			{
 				_checkListControl.Items[_checkListControl.SelectedIndex] = checkTextBox.Text;
 				checkTextBox.Text = "";
-			};
+			});
 
-			removeSelectedButton.Click += (sender, args) =>
+			InitButton(container, "Add new", (sender, args) =>
+			{
+				_checkListControl.Items.Add("New Item", CheckState.Unchecked);
+				_checkListControl.SelectedIndex = _checkListControl.Items.Count - 1;
+			});
+
+			InitButton(container, "Move Up", (sender, args) =>
+			{
+				var selectedIndex = _checkListControl.SelectedIndex;
+				SwapSelectedItemInCheckList(_checkListControl, selectedIndex - 1);
+			});
+
+			InitButton(container, "Move Down", (sender, args) =>
+			{
+				var selectedIndex = _checkListControl.SelectedIndex;
+				SwapSelectedItemInCheckList(_checkListControl, selectedIndex + 1);
+			});
+
+			InitButton(container, "Remove selected", (sender, args) =>
 			{
 				_checkListControl.Items.RemoveAt(_checkListControl.SelectedIndex);
 				checkTextBox.Text = "";
-			};
+			});
+		}
 
-			moveUpButton.Click += (sender, args) =>
+		private void InitButton(Control container, string title, EventHandler clickHandler)
+		{
+			var button = new Button()
 			{
-				var selectedIndex = _checkListControl.SelectedIndex;
-
-				if (selectedIndex == 0) return;
-				var selectedItem = _checkListControl.SelectedItem;
-
-				_checkListControl.Items.Remove(selectedItem);
-				_checkListControl.Items.Insert(selectedIndex - 1, selectedItem);
-				_checkListControl.SelectedIndex = selectedIndex - 1;
+				Text = title,
 			};
+			button.Click += clickHandler;
 
-			moveDownButton.Click += (sender, args) =>
-			{
-				var selectedIndex = _checkListControl.SelectedIndex;
+			container.Controls.Add(button);
+		}
 
-				if (selectedIndex == _checkListControl.Items.Count - 1) return;
-				var selectedItem = _checkListControl.SelectedItem;
+		private void SwapSelectedItemInCheckList(CheckedListBox checkList, int to)
+		{
+			if (to == _checkListControl.Items.Count || to < 0) return;
+			var selectedItem = _checkListControl.SelectedItem;
 
-				_checkListControl.Items.Remove(selectedItem);
-				_checkListControl.Items.Insert(selectedIndex + 1, selectedItem);
-				_checkListControl.SelectedIndex = selectedIndex + 1;
-			};
-
-			container.Controls.Add(checkTextBox);
-			container.Controls.Add(saveNoteButton);
-			container.Controls.Add(addNewButton);
-			container.Controls.Add(moveUpButton);
-			container.Controls.Add(moveDownButton);
-			container.Controls.Add(removeSelectedButton);
+			_checkListControl.Items.Remove(selectedItem);
+			_checkListControl.Items.Insert(to, selectedItem);
+			_checkListControl.SelectedIndex = to;
 		}
 	}
 }
