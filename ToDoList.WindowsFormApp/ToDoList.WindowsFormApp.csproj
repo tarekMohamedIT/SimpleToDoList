@@ -98,13 +98,14 @@
     <Compile Include="Models\SubMenuModels\OpenFormSubMenuModel.cs" />
     <Compile Include="Models\SubMenuModels\SubMenuModel.cs" />
     <Compile Include="Models\ThemeModel.cs" />
+    <Compile Include="Models\ViewModels\SectionedCheckListViewModel.cs" />
     <Compile Include="Models\ViewModels\ThemesViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ViewModels\BaseNoteViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckListViewModel.cs" />
     <Compile Include="Models\ViewModels\INoteViewModel.cs" />
-    <Compile Include="Models\ViewModels\NotesFactory.cs" />
+    <Compile Include="Factories\NotesFactory.cs" />
     <Compile Include="Models\ViewModels\SimpleNoteViewModel.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

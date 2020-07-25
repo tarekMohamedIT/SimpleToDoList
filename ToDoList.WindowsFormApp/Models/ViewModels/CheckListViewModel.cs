@@ -30,7 +30,6 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 			set => _entity = value;
 		}
 
-
 		public CheckListViewModel()
 		{
 			_checkListControl = new CheckedListBox()

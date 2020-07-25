@@ -15,7 +15,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 			{
 				Text = "Title"
 			};
-			titleBox = new TextBox {Width = 610};
+			titleBox = new TextBox {Dock = DockStyle.Top};
 
 			container.Controls.Add(label);
 			container.Controls.Add(titleBox);

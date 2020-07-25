@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using ToDoList.Core.Models;
+using ToDoList.WindowsFormApp.Models.ViewModels;
 
-namespace ToDoList.WindowsFormApp.Models.ViewModels
+namespace ToDoList.WindowsFormApp.Factories
 {
 	public class NotesFactory
 	{
@@ -10,6 +11,9 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 		{
 			if (entity is CheckList)
 				return new CheckListViewModel() { Entity = entity as CheckList } as INoteViewModel<TEntity>;
+
+			if (entity is SectionedCheckList)
+				return new SectionedCheckListViewModel(){Entity = entity as SectionedCheckList} as INoteViewModel<TEntity>;
 
 			return new SimpleNoteViewModel() { Entity = entity as Note } as INoteViewModel<TEntity>;
 		}
@@ -24,6 +28,14 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 					Id = 0,
 					CreationDate = DateTime.Now,
 					Items = new List<ChecklistItem>()
+				};
+
+			else if (noteType == "Sectioned Check List")
+				note = new SectionedCheckList()
+				{
+					Id = 0,
+					CreationDate = DateTime.Now,
+					Sections = new List<CheckListSection>()
 				};
 
 			else

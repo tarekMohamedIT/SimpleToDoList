@@ -45,9 +45,6 @@
 			// comboBox1
 			// 
 			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Items.AddRange(new object[] {
-            "Note",
-            "Check List"});
 			this.comboBox1.Location = new System.Drawing.Point(16, 30);
 			this.comboBox1.Name = "comboBox1";
 			this.comboBox1.Size = new System.Drawing.Size(141, 21);
