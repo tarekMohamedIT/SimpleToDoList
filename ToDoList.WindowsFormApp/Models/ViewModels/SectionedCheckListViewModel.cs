@@ -198,7 +198,8 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 				FlowDirection = FlowDirection.LeftToRight,
 				WrapContents = false,
 				AutoSize = true,
-				Parent = parent
+				Parent = parent,
+				Margin = new Padding(25, 0, 0, 0)
 			};
 			
 			var checkboxControl = new CheckBox()
