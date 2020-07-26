@@ -57,6 +57,7 @@
     <Compile Include="Contexts\FormsContext.cs" />
     <Compile Include="Factories\SubMenuItemFactory.cs" />
     <Compile Include="Factories\ThemeFactory.cs" />
+    <Compile Include="FormsLogger.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

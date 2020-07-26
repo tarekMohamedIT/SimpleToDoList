@@ -25,8 +25,9 @@ namespace ToDoList.WindowsFormApp.Forms
 			_noteProvider = new XmlDataProvider<List<BaseNote>>("notesList.xml", new Type[]
 			{
 				typeof(Note),
-				typeof(CheckList)
-			});
+				typeof(CheckList),
+				typeof(SectionedCheckList),
+			}, new FormsLogger());
 			_notesRepository = new BaseMemoryRepository<BaseNote>(_noteProvider);
 
 			var notesList = _notesRepository.Table.ToList();

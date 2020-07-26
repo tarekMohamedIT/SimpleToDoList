@@ -288,7 +288,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 		{
 			Entity = new SectionedCheckList()
 			{
-				Id = 15,
+				Id = 0,
 				CreationDate = DateTime.Now,
 				Title = "Mocked up",
 				Sections = new List<CheckListSection>()
