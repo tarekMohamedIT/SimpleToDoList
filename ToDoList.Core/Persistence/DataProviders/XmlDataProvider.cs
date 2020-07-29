@@ -15,14 +15,14 @@ namespace ToDoList.Core.Persistence.DataProviders
 	/// <typeparam name="T">
 	/// The type of the model expected to be saved/loaded
 	/// </typeparam>
-	public class XmlDataProvider<T> : IDataProvider<T>
+	public class XmlDataProvider<T> : IDataProvider<T> where T : class
 	{
-		
+	
+		public T Item { get; set; }
+		private bool _isLoaded;
 		private readonly string _filePath;
-		public T Item { get; set; } //List<T> instead of IEnumerable<T> for Serialization/Deserialization
 		private readonly Type[] _knownTypes;
 		private readonly ILogger _logger;
-		private bool _isLoaded = false;
 
 		/// <summary>
 		/// A constructor for the XmlDataProvider with a file path and an optional logger

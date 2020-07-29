@@ -15,6 +15,8 @@ namespace ToDoList.WindowsFormApp.Forms
 {
 	public partial class SettingsForm : Form
 	{
+		private readonly SettingsModel _currentSettingsModel = FormsContext.Instance.Settings;
+
 		public SettingsForm()
 		{
 			InitializeComponent();
@@ -28,20 +30,20 @@ namespace ToDoList.WindowsFormApp.Forms
 
 		private void InitializeSettings()
 		{
-			useTitleCheckBox.Checked = FormsContext.Instance.Settings.UseTitleForNotesList;
+			useTitleCheckBox.Checked = _currentSettingsModel.UseTitleForNotesList;
 		}
 
 		private void saveButton_Click(object sender, EventArgs e)
 		{
 			var provider = new XmlDataProvider<SettingsModel>("settings.xml", null);
-			provider.Item = FormsContext.Instance.Settings;
+			provider.Item = _currentSettingsModel;
 
 			provider.Save();
 		}
 
 		private void useTitleCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			FormsContext.Instance.Settings.UseTitleForNotesList = useTitleCheckBox.Checked;
+			_currentSettingsModel.UseTitleForNotesList = useTitleCheckBox.Checked;
 		}
 	}
 }

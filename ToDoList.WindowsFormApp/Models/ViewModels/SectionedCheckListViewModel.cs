@@ -9,13 +9,13 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 	public class SectionedCheckListViewModel : BaseNoteViewModel<SectionedCheckList>
 	{
 		private SectionedCheckList _entity;
-		private FlowLayoutPanel _checkListControl;
-		private FlowLayoutPanel _toolsControl;
+		private readonly FlowLayoutPanel _checkListControl;
+		private readonly FlowLayoutPanel _toolsControl;
 		private FlowLayoutPanel _currentSelectedSectionControl;
 		private FlowLayoutPanel _currentSelectedItemControl;
 		private Label _textboxLabel;
 		private TextBox _textbox;
-		private bool editSectionText;
+		private bool _editSectionText;
 		public override SectionedCheckList Entity
 		{
 			get
@@ -120,13 +120,13 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 
 			InitButton(container, "Remove", (sender, args) =>
 			{
-				if (editSectionText && _currentSelectedSectionControl != null)
+				if (_editSectionText && _currentSelectedSectionControl != null)
 				{
 					_checkListControl.Controls.Remove(_currentSelectedSectionControl);
 					_currentSelectedSectionControl = null;
 				}
 
-				else if (!editSectionText && _currentSelectedItemControl != null)
+				else if (!_editSectionText && _currentSelectedItemControl != null)
 				{
 					_currentSelectedSectionControl.Controls.Remove(_currentSelectedItemControl);
 					_currentSelectedItemControl = null;
@@ -160,7 +160,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 
 			InitButton(textControl, "Save", (sender, args) =>
 			{
-				if (editSectionText)
+				if (_editSectionText)
 					_currentSelectedSectionControl.Controls[0].Text = _textbox.Text;
 				else
 					_currentSelectedItemControl.Controls[1].Text = _textbox.Text;
@@ -224,7 +224,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 			{
 				_currentSelectedItemControl = checkboxFlowLayout;
 				_textbox.Text = checkboxLabel.Text;
-				editSectionText = false;
+				_editSectionText = false;
 				SelectSection(parent as FlowLayoutPanel);
 			};
 
@@ -242,7 +242,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 				SelectSection(header.Parent as FlowLayoutPanel);
 
 				_textbox.Text = header.Text;
-				editSectionText = true;
+				_editSectionText = true;
 			};
 			return header;
 		}
@@ -269,16 +269,6 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 				button.Click += clickHandler;
 
 			container.Controls.Add(button);
-		}
-
-		private void SwapSelectedItemInCheckList(CheckedListBox checkList, int to)
-		{
-			if (to == checkList.Items.Count || to < 0) return;
-			var selectedItem = checkList.SelectedItem;
-
-			checkList.Items.Remove(selectedItem);
-			checkList.Items.Insert(to, selectedItem);
-			checkList.SelectedIndex = to;
 		}
 	}
 

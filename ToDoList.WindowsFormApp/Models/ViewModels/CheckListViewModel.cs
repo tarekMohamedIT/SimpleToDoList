@@ -113,12 +113,12 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 
 		private void SwapSelectedItemInCheckList(CheckedListBox checkList, int to)
 		{
-			if (to == _checkListControl.Items.Count || to < 0) return;
-			var selectedItem = _checkListControl.SelectedItem;
+			if (to == checkList.Items.Count || to < 0) return;
+			var selectedItem = checkList.SelectedItem;
 
-			_checkListControl.Items.Remove(selectedItem);
-			_checkListControl.Items.Insert(to, selectedItem);
-			_checkListControl.SelectedIndex = to;
+			checkList.Items.Remove(selectedItem);
+			checkList.Items.Insert(to, selectedItem);
+			checkList.SelectedIndex = to;
 		}
 	}
 }

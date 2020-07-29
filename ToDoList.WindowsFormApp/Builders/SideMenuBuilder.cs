@@ -38,10 +38,8 @@ namespace ToDoList.WindowsFormApp.Builders
 			_mainPanel = mainPanel;
 			_sideMenu = sideMenu;
 
-			Theme = Theme ?? ThemeFactory.GetCurrent();
-			_sideMenu.BackColor = Theme.SidePanelMainColor;
-			_mainPanel.BackColor = Theme.MainPanelBackgroundColor;
-			
+			ApplyThemeColors(_sideMenu, _mainPanel);
+
 			var controls = new List<Control>();
 			sideMenu.Controls.Clear();
 
@@ -51,13 +49,13 @@ namespace ToDoList.WindowsFormApp.Builders
 			{
 				var mainBtn = BuildMainMenuItem(menu.Name);
 
-				if (menu.SubMenuItems == null || menu.SubMenuItems.Count == 0)
+				if (menu.SubMenuItems == null || menu.SubMenuItems.Count == 0) // A main button
 				{
 					mainBtn.Click += menu.OnClick;
 					controls.Add(mainBtn);
 				}
 
-				else
+				else // A main item with a list of sub items
 				{
 					var subPanel = BuildSubMenuPanel(menu.SubMenuItems);
 					mainBtn.Click += (sender, args) => { subPanel.Visible = !subPanel.Visible; };
@@ -73,10 +71,11 @@ namespace ToDoList.WindowsFormApp.Builders
 			sideMenu.Controls.Add(BuildLogoPanel());
 		}
 
-		public void ChangeTheme(ThemeModel theme)
+		private void ApplyThemeColors(Panel sideMenuPanel, Panel mainPanel)
 		{
-			Theme = theme;
-			Build(_sideMenu, _mainPanel);
+			Theme = Theme ?? ThemeFactory.GetCurrent();
+			sideMenuPanel.BackColor = Theme.SidePanelMainColor;
+			mainPanel.BackColor = Theme.MainPanelBackgroundColor;
 		}
 
 		private Button BuildMainMenuItem(string name)
@@ -88,31 +87,12 @@ namespace ToDoList.WindowsFormApp.Builders
 				Height = 45,
 				BackColor = Theme.SidePanelMainColor,
 				FlatStyle = FlatStyle.Flat,
-				FlatAppearance = { BorderSize = 0},
+				FlatAppearance = { BorderSize = 0 },
 				ForeColor = Theme.SidePanelMainTextColor,
 				TextAlign = ContentAlignment.MiddleLeft,
 				Padding = new Padding(10, 0, 0, 0)
 			};
 
-			return button;
-		}
-
-		private Button BuildSubMenuItem(SubMenuModel metaData)
-		{
-			var button = new Button()
-			{
-				Text = metaData.Name,
-				Dock = DockStyle.Top,
-				Height = 45,
-				BackColor = Theme.SidePanelSubMenuColor,
-				FlatStyle = FlatStyle.Flat,
-				FlatAppearance = { BorderSize = 0 },
-				ForeColor = Theme.SidePanelSubMenuTextColor,
-				TextAlign = ContentAlignment.MiddleLeft,
-				Padding = new Padding(35, 0, 0, 0)
-			};
-
-			button.Click += metaData.OnClick;
 			return button;
 		}
 
@@ -139,6 +119,25 @@ namespace ToDoList.WindowsFormApp.Builders
 			return panel;
 		}
 
+		private Button BuildSubMenuItem(SubMenuModel metaData)
+		{
+			var button = new Button()
+			{
+				Text = metaData.Name,
+				Dock = DockStyle.Top,
+				Height = 45,
+				BackColor = Theme.SidePanelSubMenuColor,
+				FlatStyle = FlatStyle.Flat,
+				FlatAppearance = { BorderSize = 0 },
+				ForeColor = Theme.SidePanelSubMenuTextColor,
+				TextAlign = ContentAlignment.MiddleLeft,
+				Padding = new Padding(35, 0, 0, 0)
+			};
+
+			button.Click += metaData.OnClick;
+			return button;
+		}
+
 		private Panel BuildLogoPanel()
 		{
 			var panel = new Panel()
@@ -163,5 +162,12 @@ namespace ToDoList.WindowsFormApp.Builders
 
 			return panel;
 		}
+
+		public void ChangeTheme(ThemeModel theme)
+		{
+			Theme = theme;
+			Build(_sideMenu, _mainPanel);
+		}
+		
 	}
 }
