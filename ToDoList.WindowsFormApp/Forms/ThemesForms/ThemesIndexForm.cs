@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using ToDoList.Core.Persistence.DataProviders;
 using ToDoList.WindowsFormApp.Adapters;
 using ToDoList.WindowsFormApp.Builders;
@@ -55,11 +47,13 @@ namespace ToDoList.WindowsFormApp.Forms.ThemesForms
 
 				label.Click += (sender, args) =>
 				{
-					ThemeFactory.ThemesProvider.Item.SelectedTheme = label.Text;
-					ThemeFactory.ThemesProvider.Save();
-					SideMenuBuilder.GetInstance().ChangeTheme(ThemeFactory.GetCurrent());
-					FormsContext.Instance.CurrentActiveForm?.Close();
+					_dataProvider.Item.SelectedTheme = label.Text;
+					_dataProvider.Save();
 
+					FormsContext.Instance.CurrentTheme = ThemeFactory.GetCurrent();
+					SideMenuBuilder.GetInstance().ChangeTheme(FormsContext.Instance.CurrentTheme);
+
+					FormsContext.Instance.CurrentActiveForm?.Close();
 				};
 
 				_adapter.Add(label);

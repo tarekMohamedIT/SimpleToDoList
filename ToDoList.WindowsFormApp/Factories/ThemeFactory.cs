@@ -35,6 +35,18 @@ namespace ToDoList.WindowsFormApp.Factories
 			return themeViewModel.ThemesList.FirstOrDefault(t => t.Title == themeViewModel.SelectedTheme) ?? Default;
 		}
 
+		public static ThemesViewModel NewInstance()
+		{
+			return new ThemesViewModel()
+			{
+				SelectedTheme = "Default", 
+				ThemesList = new List<ThemeModel>()
+				{
+					Default
+				}
+			};
+		}
+
 		public static IDataProvider<ThemesViewModel> ThemesProvider = new XmlDataProvider<ThemesViewModel>("themes.xml", null);
 	}
 }

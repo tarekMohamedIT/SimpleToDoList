@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ToDoList.Core.Persistence.DataProviders;
 using ToDoList.WindowsFormApp.Builders;
+using ToDoList.WindowsFormApp.Contexts;
 using ToDoList.WindowsFormApp.Factories;
 using ToDoList.WindowsFormApp.Models;
 using ToDoList.WindowsFormApp.Models.ViewModels;
@@ -110,10 +111,7 @@ namespace ToDoList.WindowsFormApp.Forms.ThemesForms
 				};
 
 				if (_dataProvider.Item == null)
-				{
-					_dataProvider.Item = new ThemesViewModel();
-					_dataProvider.Item.ThemesList.Add(ThemeFactory.Default);
-				}
+					_dataProvider.Item = ThemeFactory.NewInstance();
 
 				_dataProvider.Item.ThemesList.Add(Instance);
 			}
@@ -135,7 +133,8 @@ namespace ToDoList.WindowsFormApp.Forms.ThemesForms
 			Instance = null;
 			EditInstance = null;
 
-			SideMenuBuilder.GetInstance().ChangeTheme(ThemeFactory.GetCurrent());
+			FormsContext.Instance.CurrentTheme = ThemeFactory.GetCurrent();
+			SideMenuBuilder.GetInstance().ChangeTheme(FormsContext.Instance.CurrentTheme);
 			this.Close();
 		}
 	}

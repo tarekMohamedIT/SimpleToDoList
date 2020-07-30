@@ -73,7 +73,7 @@ namespace ToDoList.WindowsFormApp.Builders
 
 		private void ApplyThemeColors(Panel sideMenuPanel, Panel mainPanel)
 		{
-			Theme = Theme ?? ThemeFactory.GetCurrent();
+			Theme = FormsContext.Instance.CurrentTheme;
 			sideMenuPanel.BackColor = Theme.SidePanelMainColor;
 			mainPanel.BackColor = Theme.MainPanelBackgroundColor;
 		}
@@ -156,7 +156,7 @@ namespace ToDoList.WindowsFormApp.Builders
 				Dock = DockStyle.Fill
 			};
 
-			label.Click += (sender, args) => FormsContext.Instance.CurrentActiveForm.Close();
+			label.Click += (sender, args) => FormsContext.Instance.CurrentActiveForm?.Close();
 
 			panel.Controls.Add(label);
 
