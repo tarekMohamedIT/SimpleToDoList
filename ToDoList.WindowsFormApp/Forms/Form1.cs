@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using ToDoList.Core;
 using ToDoList.Core.Persistence.Repositories.Concrete;
+using ToDoList.Core.Services;
 using ToDoList.DataAccess.DataProviders;
 using ToDoList.DataAccess.Entities;
 using ToDoList.DataAccess.Repositories;
@@ -15,10 +17,9 @@ namespace ToDoList.WindowsFormApp.Forms
 {
 	public partial class Form1 : Form
 	{
-		private IRepository<BaseNote> _notesRepository;
 		private IDataProvider<List<BaseNote>> _noteProvider;
 		private INoteViewModel _currentNoteViewModel;
-
+		private BaseCrudService<BaseNote> _service;
 		public Form1()
 		{
 			InitializeComponent();
@@ -28,9 +29,9 @@ namespace ToDoList.WindowsFormApp.Forms
 				typeof(CheckList),
 				typeof(SectionedCheckList),
 			}, new FormsLogger());
-			_notesRepository = new BaseMemoryRepository<BaseNote>(_noteProvider);
+			_service = BaseCrudService<BaseNote>.Create(_noteProvider);
 
-			var notesList = _notesRepository.Table.ToList();
+			var notesList = _service.Table.ToList();
 			int count = 0;
 			foreach (var note in notesList)
 			{
@@ -38,7 +39,6 @@ namespace ToDoList.WindowsFormApp.Forms
 					listBox1.Items.Add(note.Title);
 
 				else listBox1.Items.Add((count++).ToString("D5"));
-
 			}
 
 			if (notesList.Count > 0)
@@ -47,7 +47,7 @@ namespace ToDoList.WindowsFormApp.Forms
 
 		private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			var note = _notesRepository.Table.ToList()[listBox1.SelectedIndex];
+			var note = _service.Table.ToList()[listBox1.SelectedIndex];
 
 			_currentNoteViewModel = NotesFactory.CreateViewModel(note);
 			_currentNoteViewModel.InitControl(flowLayoutPanel1);
@@ -57,8 +57,7 @@ namespace ToDoList.WindowsFormApp.Forms
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			_notesRepository.Update(_currentNoteViewModel.Entity as BaseNote);
-			_noteProvider.Save();
+			var result = _service.Update(_currentNoteViewModel.Entity as BaseNote);
 		}
 
 		private void button2_Click(object sender, EventArgs e)
@@ -68,7 +67,7 @@ namespace ToDoList.WindowsFormApp.Forms
 
 			var note = NotesFactory.CreateNoteModel(addForm.selectedItem);
 
-			_notesRepository.Insert(note);
+			_service.Insert(note);
 			listBox1.Items.Add(note.Id.ToString("D5"));
 			listBox1.SelectedIndex = note.Id;
 		}

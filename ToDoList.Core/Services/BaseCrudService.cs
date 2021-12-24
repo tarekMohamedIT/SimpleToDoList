@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ToDoList.Core.Persistence.Repositories.Concrete;
+using ToDoList.DataAccess.DataProviders;
 using ToDoList.DataAccess.Entities;
 using ToDoList.DataAccess.Repositories;
 using ToDoList.Utils.Helpers;
@@ -16,11 +15,23 @@ namespace ToDoList.Core.Services
 		/// An instance of the data provider is used to load/save data.
 		/// </summary>
 		private IRepository<T> _repository;
+		private IDataProvider<List<T>> _provider;
 
-		public BaseCrudService(IRepository<T> repository)
+		public static BaseCrudService<T> Create(IDataProvider<List<T>> provider)
+		{
+			var repository = new BaseMemoryRepository<T>(provider);
+			return new BaseCrudService<T>(repository)
+			{
+				_provider = provider
+			};
+		}
+
+		private BaseCrudService(IRepository<T> repository)
 		{
 			_repository = repository;
 		}
+
+		public IQueryable<T> Table => _repository.Table;
 
 		public IResult<T> GetById(int id)
 		{
@@ -35,6 +46,7 @@ namespace ToDoList.Core.Services
 			return ResultsHelper.TryDo(() =>
 			{
 				_repository.Insert(entity);
+				_provider.Save();
 			});
 		}
 
@@ -43,6 +55,7 @@ namespace ToDoList.Core.Services
 			return ResultsHelper.TryDo(() =>
 			{
 				_repository.Insert(entities);
+				_provider.Save();
 			});
 		}
 
@@ -51,6 +64,7 @@ namespace ToDoList.Core.Services
 			return ResultsHelper.TryDo(() =>
 			{
 				_repository.Update(entity);
+				_provider.Save();
 			});
 		}
 
@@ -59,6 +73,7 @@ namespace ToDoList.Core.Services
 			return ResultsHelper.TryDo(() =>
 			{
 				_repository.Update(entities);
+				_provider.Save();
 			});
 		}
 
@@ -67,6 +82,7 @@ namespace ToDoList.Core.Services
 			return ResultsHelper.TryDo(() =>
 			{
 				_repository.Delete(entity);
+				_provider.Save();
 			});
 		}
 
