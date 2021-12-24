@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ToDoList.Core.Persistence.Repositories.Concrete;
+using ToDoList.Core.Services;
 using ToDoList.CoreTests.Logging;
 using ToDoList.DataAccess.DataProviders;
 using ToDoList.DataAccess.Entities;
@@ -11,6 +11,15 @@ namespace ToDoList.CoreTests
 	[TestClass]
 	public class BasicNoteTest
 	{
+		private BaseCrudService<BaseNote> _notesService;
+
+		[TestInitialize]
+		public void Init()
+		{
+			IDataProvider<List<BaseNote>> dataProvider = new JsonDataProvider<List<BaseNote>>("notesConsole.json", new ConsoleLogger());
+			_notesService = BaseCrudService<BaseNote>.Create(dataProvider);
+		}
+
 		[TestMethod]
 		public void TestMethod1()
 		{
@@ -23,10 +32,7 @@ namespace ToDoList.CoreTests
 			//}, new ConsoleLogger());
 
 			dataProvider = new JsonDataProvider<List<BaseNote>>("notesConsole.json", new ConsoleLogger());
-
-			var repo = new BaseMemoryRepository<BaseNote>(dataProvider);
-
-			repo.Insert(new Note()
+			AssertIsInserted(new Note()
 			{
 				Id = 0,
 				Title = "A simple note",
@@ -34,7 +40,7 @@ namespace ToDoList.CoreTests
 				CreationDate = DateTime.Now
 			});
 
-			repo.Insert(new Note()
+			AssertIsInserted(new Note()
 			{
 				Id = 1,
 				Title = "A simple note",
@@ -42,7 +48,7 @@ namespace ToDoList.CoreTests
 				CreationDate = DateTime.Now
 			});
 
-			repo.Insert(new CheckList()
+			AssertIsInserted(new CheckList()
 			{
 				Id = 0,
 				Title = "A simple note",
@@ -54,11 +60,13 @@ namespace ToDoList.CoreTests
 					new ChecklistItem(){Text = "Go to work", Checked = false}
 				}
 			});
+		}
 
-			dataProvider.Save();
+		private void AssertIsInserted(BaseNote note)
+		{
+			var result = _notesService.Insert(note);
 
-			Console.Write("Text completed");
-			Console.Read();
+			Assert.IsTrue(result.State == Utils.Results.ResultState.Success, result.Exception.Message);
 		}
 	}
 }
