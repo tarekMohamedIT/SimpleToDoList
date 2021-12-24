@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ToDoList.Core.Models;
+using ToDoList.DataAccess.Entities;
 
-namespace ToDoList.Core.Persistence.Repositories
+namespace ToDoList.DataAccess.Repositories
 {
 	/// <summary>
 	/// An interface for a generic Repository pattern to be used in all Implemented repositories.

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using ToDoList.Core.Models;
+using ToDoList.DataAccess.Entities;
 
 namespace ToDoList.WindowsFormApp.Models.ViewModels
 {

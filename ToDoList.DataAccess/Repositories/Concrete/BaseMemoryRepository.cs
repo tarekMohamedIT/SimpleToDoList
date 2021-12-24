@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ToDoList.Core.Models;
 using ToDoList.DataAccess.DataProviders;
+using ToDoList.DataAccess.Entities;
+using ToDoList.DataAccess.Repositories;
 
 namespace ToDoList.Core.Persistence.Repositories.Concrete
 {

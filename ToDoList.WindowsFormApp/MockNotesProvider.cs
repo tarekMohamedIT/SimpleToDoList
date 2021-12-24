@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using ToDoList.Core.Models;
 using ToDoList.DataAccess.DataProviders;
+using ToDoList.DataAccess.Entities;
 
 namespace ToDoList.WindowsFormApp
 {

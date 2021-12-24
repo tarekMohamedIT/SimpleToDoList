@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace ToDoList.Core.Models
+namespace ToDoList.DataAccess.Entities
 {
 	/// <summary>
 	/// This class is a base for ever note there is

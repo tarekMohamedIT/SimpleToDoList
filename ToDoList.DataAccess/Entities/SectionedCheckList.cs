@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ToDoList.Core.Models
+namespace ToDoList.DataAccess.Entities
 {
 	public class SectionedCheckList : BaseNote
 	{

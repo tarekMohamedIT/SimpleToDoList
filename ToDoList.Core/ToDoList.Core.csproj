@@ -73,15 +73,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\BaseNote.cs" />
-    <Compile Include="Models\CheckList.cs" />
-    <Compile Include="Models\ChecklistItem.cs" />
-    <Compile Include="Models\CheckListSection.cs" />
-    <Compile Include="Models\IEntity.cs" />
-    <Compile Include="Models\Note.cs" />
-    <Compile Include="Models\SectionedCheckList.cs" />
-    <Compile Include="Persistence\Repositories\Concrete\BaseMemoryRepository.cs" />
-    <Compile Include="Persistence\Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +90,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="Persistence\DataProviders\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

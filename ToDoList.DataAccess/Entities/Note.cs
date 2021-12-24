@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Xml;
 
-namespace ToDoList.Core.Models
+namespace ToDoList.DataAccess.Entities
 {
 	public class Note : BaseNote
 	{

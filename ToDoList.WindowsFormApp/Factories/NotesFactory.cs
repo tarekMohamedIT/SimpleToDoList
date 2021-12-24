@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ToDoList.Core.Models;
+using ToDoList.DataAccess.Entities;
 using ToDoList.WindowsFormApp.Models.ViewModels;
 
 namespace ToDoList.WindowsFormApp.Factories

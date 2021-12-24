@@ -1,4 +1,4 @@
-﻿namespace ToDoList.Core.Models
+﻿namespace ToDoList.DataAccess.Entities
 {
 	/// <summary>
 	/// A common interface used for the repository pattern.
