@@ -17,7 +17,6 @@ namespace ToDoList.Core.Persistence.DataProviders
 	/// </typeparam>
 	public class XmlDataProvider<T> : IDataProvider<T> where T : class
 	{
-	
 		public T Item { get; set; }
 		private bool _isLoaded;
 		private readonly string _filePath;

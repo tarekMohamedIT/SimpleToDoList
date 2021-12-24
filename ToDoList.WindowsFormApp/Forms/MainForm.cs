@@ -23,7 +23,7 @@ namespace ToDoList.WindowsFormApp.Forms
 			var builder = SideMenuBuilder.GetInstance();
 			builder.MenuModels = new List<SubMenuModel>()
 				{
-					modelsFactory.CreateOpenFormMenuModel("My Notes", (() => new Form1()), panelChildForm),
+					modelsFactory.CreateOpenFormMenuModel("My Notes", () => new Form1(), panelChildForm),
 					modelsFactory.CreateMainMenuModel("Settings", new List<SubMenuModel>()
 					{
 						modelsFactory.CreateOpenFormMenuModel("General",

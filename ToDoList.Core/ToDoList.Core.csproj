@@ -93,6 +93,15 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ToDoList.DataAccess\ToDoList.DataAccess.csproj">
+      <Project>{059efa81-d3d2-4f4a-8eec-5c957aa18e4a}</Project>
+      <Name>ToDoList.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ToDoList.Utils\ToDoList.Utils.csproj">
+      <Project>{48375209-7e3e-466f-8197-4b7717e7c727}</Project>
+      <Name>ToDoList.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

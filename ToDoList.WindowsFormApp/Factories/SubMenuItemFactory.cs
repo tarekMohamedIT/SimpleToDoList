@@ -21,16 +21,6 @@ namespace ToDoList.WindowsFormApp.Factories
 			};
 		}
 
-		public SubMenuModel CreateSubMenuModel(string name, EventHandler handler)
-		{
-			return new SubMenuModel()
-			{
-				Name = name,
-				OnClick = handler,
-				SubMenuItems = null
-			};
-		}
-
 		public SubMenuModel CreateOpenFormMenuModel(string name, Func<Form> formFactory, Panel parent)
 		{
 			return new OpenFormSubMenuModel(formFactory, parent)
