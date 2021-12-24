@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ToDoList.Core.Persistence.DataProviders;
+using ToDoList.DataAccess.DataProviders;
 using ToDoList.WindowsFormApp.Models;
 using ToDoList.WindowsFormApp.Models.ViewModels;
 

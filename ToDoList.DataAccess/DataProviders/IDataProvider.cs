@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ToDoList.Core.Persistence.DataProviders
+namespace ToDoList.DataAccess.DataProviders
 {
 	/// <summary>
 	/// An interface Used for saving and loading data from a data source. 

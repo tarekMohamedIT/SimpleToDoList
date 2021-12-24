@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ToDoList.Core.Models;
-using ToDoList.Core.Persistence.DataProviders;
 using ToDoList.Core.Persistence.Repositories.Concrete;
 using ToDoList.CoreTests.Logging;
+using ToDoList.DataAccess.DataProviders;
 
 namespace ToDoList.CoreTests
 {

@@ -80,11 +80,7 @@
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\SectionedCheckList.cs" />
-    <Compile Include="Persistence\DataProviders\IDataProvider.cs" />
-    <Compile Include="Persistence\DataProviders\JsonDataProvider.cs" />
-    <Compile Include="Persistence\DataProviders\XmlDataProvider.cs" />
     <Compile Include="Persistence\Repositories\Concrete\BaseMemoryRepository.cs" />
-    <Compile Include="Persistence\Repositories\IEFRepository.cs" />
     <Compile Include="Persistence\Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -103,7 +99,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Utilities\" />
+    <Folder Include="Persistence\DataProviders\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ToDoList.Core.Models;
-using ToDoList.Core.Persistence.DataProviders;
+using ToDoList.DataAccess.DataProviders;
 
 namespace ToDoList.Core.Persistence.Repositories.Concrete
 {

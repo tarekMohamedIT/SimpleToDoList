@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using System.Xml;
 using System.Xml.Serialization;
-using ToDoList.Core.Models;
 using ToDoList.Utils.Logging;
 
-namespace ToDoList.Core.Persistence.DataProviders
+namespace ToDoList.DataAccess.DataProviders
 {
 	/// <summary>
 	/// A data provider implementation for saving/loading data in XML Format.

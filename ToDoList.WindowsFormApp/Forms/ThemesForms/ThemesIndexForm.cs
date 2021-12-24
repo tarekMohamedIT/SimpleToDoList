@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using ToDoList.Core.Persistence.DataProviders;
+using ToDoList.DataAccess.DataProviders;
 using ToDoList.WindowsFormApp.Adapters;
 using ToDoList.WindowsFormApp.Builders;
 using ToDoList.WindowsFormApp.Contexts;

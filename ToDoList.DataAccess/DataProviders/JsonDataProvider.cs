@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
 using ToDoList.Utils.Logging;
 
-namespace ToDoList.Core.Persistence.DataProviders
+namespace ToDoList.DataAccess.DataProviders
 {
 	/// <summary>
 	/// A data provider implementation for saving/loading data in JSON Format.
