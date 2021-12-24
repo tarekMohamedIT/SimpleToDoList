@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ToDoList.Core</RootNamespace>
     <AssemblyName>ToDoList.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -87,7 +87,6 @@
     <Compile Include="Persistence\Repositories\IEFRepository.cs" />
     <Compile Include="Persistence\Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\ILogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -102,6 +101,9 @@
       <Project>{48375209-7e3e-466f-8197-4b7717e7c727}</Project>
       <Name>ToDoList.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

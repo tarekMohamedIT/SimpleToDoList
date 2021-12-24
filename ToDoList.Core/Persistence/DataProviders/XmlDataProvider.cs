@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Xml;
 using System.Xml.Serialization;
 using ToDoList.Core.Models;
-using ToDoList.Core.Utilities;
+using ToDoList.Utils.Logging;
 
 namespace ToDoList.Core.Persistence.DataProviders
 {

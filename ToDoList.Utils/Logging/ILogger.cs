@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ToDoList.Core.Utilities
+namespace ToDoList.Utils.Logging
 {
 	public interface ILogger
 	{

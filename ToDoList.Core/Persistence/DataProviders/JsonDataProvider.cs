@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using ToDoList.Core.Utilities;
+using ToDoList.Utils.Logging;
 
 namespace ToDoList.Core.Persistence.DataProviders
 {

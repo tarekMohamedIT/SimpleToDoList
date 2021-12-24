@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using ToDoList.Core.Utilities;
+using ToDoList.Utils.Logging;
 
 namespace ToDoList.WindowsFormApp
 {
