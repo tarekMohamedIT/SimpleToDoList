@@ -17,19 +17,12 @@ namespace ToDoList.WindowsFormApp.Forms
 {
 	public partial class Form1 : Form
 	{
-		private IDataProvider<List<BaseNote>> _noteProvider;
 		private INoteViewModel _currentNoteViewModel;
 		private BaseCrudService<BaseNote> _service;
 		public Form1()
 		{
 			InitializeComponent();
-			_noteProvider = new XmlDataProvider<List<BaseNote>>("notesList.xml", new Type[]
-			{
-				typeof(Note),
-				typeof(CheckList),
-				typeof(SectionedCheckList),
-			}, new FormsLogger());
-			_service = BaseCrudService<BaseNote>.Create(_noteProvider);
+			_service = AppServicesResolver.Current.Resolve<BaseCrudService<BaseNote>>();
 
 			var notesList = _service.Table.ToList();
 			int count = 0;

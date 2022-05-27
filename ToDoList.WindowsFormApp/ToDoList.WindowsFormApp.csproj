@@ -109,6 +109,7 @@
     <Compile Include="Models\ViewModels\INoteViewModel.cs" />
     <Compile Include="Factories\NotesFactory.cs" />
     <Compile Include="Models\ViewModels\SimpleNoteViewModel.cs" />
+    <Compile Include="Startup.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

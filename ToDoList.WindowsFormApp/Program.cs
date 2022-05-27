@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToDoList.Core;
 using ToDoList.WindowsFormApp.Forms;
 
 namespace ToDoList.WindowsFormApp
@@ -15,6 +16,8 @@ namespace ToDoList.WindowsFormApp
 		[STAThread]
 		static void Main()
 		{
+			new Startup().RegisterServices(AppServicesResolver.Current);
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainForm());
