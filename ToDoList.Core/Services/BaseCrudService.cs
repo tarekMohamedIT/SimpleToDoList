@@ -19,7 +19,7 @@ namespace ToDoList.Core.Services
 
 		public static BaseCrudService<T> Create(IDataProvider<List<T>> provider)
 		{
-			var repository = new BaseMemoryRepository<T>(provider);
+			var repository = new BaseRepository<T>(provider);
 			return new BaseCrudService<T>(repository)
 			{
 				_provider = provider

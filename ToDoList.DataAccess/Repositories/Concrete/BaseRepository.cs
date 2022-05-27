@@ -11,14 +11,14 @@ namespace ToDoList.Core.Persistence.Repositories.Concrete
 	/// An implementation for the Generic IRepository, Using a data provider for data loading/saving.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class BaseMemoryRepository<T> : IRepository<T> where T : IEntity
+	public class BaseRepository<T> : IRepository<T> where T : IEntity
 	{
 		/// <summary>
 		/// An instance of the data provider is used to load/save data.
 		/// </summary>
 		private IDataProvider<List<T>> _provider;
 
-		public BaseMemoryRepository(IDataProvider<List<T>> provider)
+		public BaseRepository(IDataProvider<List<T>> provider)
 		{
 			this._provider = provider;
 			_table = _provider != null ? _provider.Load() : new List<T>();

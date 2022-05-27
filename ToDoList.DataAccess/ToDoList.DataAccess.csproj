@@ -55,7 +55,7 @@
     <Compile Include="Entities\Note.cs" />
     <Compile Include="Entities\SectionedCheckList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Concrete\BaseMemoryRepository.cs" />
+    <Compile Include="Repositories\Concrete\BaseRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>
