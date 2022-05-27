@@ -55,7 +55,7 @@ namespace ToDoList.Core.Persistence.Repositories.Concrete
 			_table.Add(entity);
 		}
 
-		/// <inheritdoc cref="IRepository{TEntity}.Insert(System.Collections.Generic.IEnumerable{TEntity})"/>
+		/// <inheritdoc cref="IRepository{TEntity}.Insert(IEnumerable{TEntity})"/>
 		public void Insert(IEnumerable<T> entities)
 		{
 			foreach (var entity in entities)
@@ -75,7 +75,7 @@ namespace ToDoList.Core.Persistence.Repositories.Concrete
 			_table[existed] = entity;
 		}
 
-		/// <inheritdoc cref="IRepository{TEntity}.Update(System.Collections.Generic.IEnumerable{TEntity})"/>
+		/// <inheritdoc cref="IRepository{TEntity}.Update(IEnumerable{TEntity})"/>
 		public void Update(IEnumerable<T> entities)
 		{
 			foreach (var entity in entities)
@@ -95,7 +95,7 @@ namespace ToDoList.Core.Persistence.Repositories.Concrete
 			_table.Remove(entity);
 		}
 
-		/// <inheritdoc cref="IRepository{TEntity}.Delete(System.Collections.Generic.IEnumerable{TEntity})"/>
+		/// <inheritdoc cref="IRepository{TEntity}.Delete(IEnumerable{TEntity})"/>
 		public void Delete(IEnumerable<T> entities)
 		{
 			_table.RemoveAll(entities.Contains);
