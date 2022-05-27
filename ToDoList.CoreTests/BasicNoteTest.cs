@@ -1,10 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using ToDoList.Core;
 using ToDoList.Core.Services;
 using ToDoList.CoreTests.Logging;
 using ToDoList.DataAccess.DataProviders;
 using ToDoList.DataAccess.Entities;
+using ToDoList.Utils.Logging;
 
 namespace ToDoList.CoreTests
 {
@@ -16,22 +18,21 @@ namespace ToDoList.CoreTests
 		[TestInitialize]
 		public void Init()
 		{
-			IDataProvider<List<BaseNote>> dataProvider = new JsonDataProvider<List<BaseNote>>("notesConsole.json", new ConsoleLogger());
-			_notesService = BaseCrudService<BaseNote>.Create(dataProvider);
+			var appServices = AppServicesResolver.Current;
+			appServices.Register<ILogger>(() => new ConsoleLogger());
+
+			appServices.Register<IDataProvider<List<BaseNote>>>(
+				() => new MemoryDataProvider<List<BaseNote>>(new List<BaseNote>()));
+
+			appServices.Register<BaseCrudService<BaseNote>>(
+				() =>  BaseCrudService<BaseNote>.Create(appServices.Resolve<IDataProvider<List<BaseNote>>>()));
+
+			_notesService = appServices.Resolve<BaseCrudService<BaseNote>>();
 		}
 
 		[TestMethod]
-		public void TestMethod1()
+		public void Notes_AreInserted_Success()
 		{
-			IDataProvider<List<BaseNote>> dataProvider;
-
-			//dataProvider = new XmlDataProvider<List<BaseNote>>("notesConsole.xml", new[]
-			//{
-			//	typeof(Note),
-			//	typeof(CheckList)
-			//}, new ConsoleLogger());
-
-			dataProvider = new JsonDataProvider<List<BaseNote>>("notesConsole.json", new ConsoleLogger());
 			AssertIsInserted(new Note()
 			{
 				Id = 0,
@@ -66,7 +67,7 @@ namespace ToDoList.CoreTests
 		{
 			var result = _notesService.Insert(note);
 
-			Assert.IsTrue(result.State == Utils.Results.ResultState.Success, result.Exception.Message);
+			Assert.IsTrue(result.State == Utils.Results.ResultState.Success, result.Exception?.Message ?? "Success");
 		}
 	}
 }

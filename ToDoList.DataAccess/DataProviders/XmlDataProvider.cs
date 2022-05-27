@@ -42,19 +42,12 @@ namespace ToDoList.DataAccess.DataProviders
 		/// <inheritdoc/>
 		public void Save()
 		{
-			try
+			using (var writer = XmlWriter.Create(_filePath))
 			{
-				using (var writer = XmlWriter.Create(_filePath))
-				{
-					XmlSerializer xs = new XmlSerializer(typeof(T), _knownTypes);
-					xs.Serialize(writer, Item);
-				}
-				_logger?.Log("Data saved successfully");
+				XmlSerializer xs = new XmlSerializer(typeof(T), _knownTypes);
+				xs.Serialize(writer, Item);
 			}
-			catch (Exception e)
-			{
-				_logger?.Log(e);
-			}
+			_logger?.Log("Data saved successfully");
 		}
 
 		/// <summary>
@@ -64,22 +57,13 @@ namespace ToDoList.DataAccess.DataProviders
 		{
 			if (_isLoaded) return Item;
 			_isLoaded = true;
-			try
+			using (var fileStream = new FileStream(_filePath, FileMode.Open))
 			{
-				using (var fileStream = new FileStream(_filePath, FileMode.Open))
-				{
-
-					var xs = new XmlSerializer(typeof(T), _knownTypes);
-					Item = (T) xs.Deserialize(fileStream);
-				}
-
-				_logger?.Log("Data loaded successfully");
+				var xs = new XmlSerializer(typeof(T), _knownTypes);
+				Item = (T)xs.Deserialize(fileStream);
 			}
-			catch (Exception e)
-			{
-				_logger?.Log(e);
-				Item = default(T);
-			}
+
+			_logger?.Log("Data loaded successfully");
 
 			return Item;
 		}

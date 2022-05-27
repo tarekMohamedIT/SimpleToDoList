@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
+using Newtonsoft.Json;
 using ToDoList.Utils.Logging;
 
 namespace ToDoList.DataAccess.DataProviders
@@ -35,26 +33,18 @@ namespace ToDoList.DataAccess.DataProviders
 		/// <inheritdoc/>
 		public void Save()
 		{
-			try
+			var jsonString = JsonConvert.SerializeObject(Item, Formatting.Indented, new JsonSerializerSettings
 			{
-				var jsonString = JsonConvert.SerializeObject(Item, Formatting.Indented, new JsonSerializerSettings
-				{
-					TypeNameHandling = TypeNameHandling.All
-				});
-				File.WriteAllText(_filePath, jsonString);
+				TypeNameHandling = TypeNameHandling.All
+			});
+			File.WriteAllText(_filePath, jsonString);
 
-				_logger?.Log("Data saved successfully");
-			}
-
-			catch (Exception e)
-			{
-				_logger?.Log(e);
-			}
+			_logger?.Log("Data saved successfully");
 		}
 
 		public void Dispose()
 		{
-			
+
 		}
 
 		/// <summary>
@@ -62,22 +52,18 @@ namespace ToDoList.DataAccess.DataProviders
 		/// </summary>
 		public T Load()
 		{
-			if (_isLoaded) return Item;
+			if (_isLoaded)
+			{
+				return Item;
+			}
+
 			_isLoaded = true;
 
-			try
+			Item = JsonConvert.DeserializeObject<T>(File.ReadAllText(_filePath), new JsonSerializerSettings
 			{
-				Item = JsonConvert.DeserializeObject<T>(File.ReadAllText(_filePath), new JsonSerializerSettings
-				{
-					TypeNameHandling = TypeNameHandling.All
-				});
-				_logger?.Log("Data loaded successfully");
-			}
-			catch (Exception e)
-			{
-				_logger?.Log(e);
-				Item = default(T);
-			}
+				TypeNameHandling = TypeNameHandling.All
+			});
+			_logger?.Log("Data loaded successfully");
 
 			return Item;
 		}

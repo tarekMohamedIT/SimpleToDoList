@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="DataProviders\IDataProvider.cs" />
     <Compile Include="DataProviders\JsonDataProvider.cs" />
+    <Compile Include="DataProviders\MemoryDataProvider.cs" />
     <Compile Include="DataProviders\XmlDataProvider.cs" />
     <Compile Include="Entities\BaseNote.cs" />
     <Compile Include="Entities\CheckList.cs" />
