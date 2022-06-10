@@ -52,11 +52,16 @@
     <Compile Include="Entities\CheckList.cs" />
     <Compile Include="Entities\ChecklistItem.cs" />
     <Compile Include="Entities\CheckListSection.cs" />
+    <Compile Include="Entities\IAuditedEntity.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Note.cs" />
     <Compile Include="Entities\SectionedCheckList.cs" />
+    <Compile Include="Filters\BaseNoteFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Concrete\BaseMemoryRepository.cs" />
     <Compile Include="Repositories\Concrete\BaseRepository.cs" />
+    <Compile Include="Repositories\Concrete\NotesRepository.cs" />
+    <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -45,10 +45,10 @@ namespace ToDoList.WindowsFormApp
 					Title = "A simple note",
 					Items = new List<ChecklistItem>()
 					{
-						new ChecklistItem(){Text = "Wake up", Checked = false},
-						new ChecklistItem(){Text = "Breakfast", Checked = false},
-						new ChecklistItem(){Text = "Workout", Checked = false},
-						new ChecklistItem(){Text = "Go to work", Checked = false}
+						new ChecklistItem(){Title = "Wake up", Checked = false},
+						new ChecklistItem(){Title = "Breakfast", Checked = false},
+						new ChecklistItem(){Title = "Workout", Checked = false},
+						new ChecklistItem(){Title = "Go to work", Checked = false}
 					}
 				}};
 		}

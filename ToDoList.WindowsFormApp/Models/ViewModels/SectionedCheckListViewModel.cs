@@ -40,7 +40,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 						{
 							currentSection.Items.Add(new ChecklistItem()
 							{
-								Text = checkLayoutPanel.Controls[1].Text,
+								Title = checkLayoutPanel.Controls[1].Text,
 								Checked = (checkLayoutPanel.Controls[0] as CheckBox)?.Checked ?? false
 							});
 						}
@@ -111,7 +111,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 			{
 				if (_currentSelectedSectionControl == null) return;
 
-				var section = CreateSectionItem(new ChecklistItem(){Text = "new section"}, _currentSelectedSectionControl);
+				var section = CreateSectionItem(new ChecklistItem(){Title = "new section"}, _currentSelectedSectionControl);
 
 
 				_currentSelectedSectionControl.Controls.Add(section);
@@ -213,8 +213,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 
 			var checkboxLabel = new Label()
 			{
-				Text = item.Text,
-				AutoSize = true,
+				Text = item.Title,
 				Dock = DockStyle.Left,
 				TextAlign = ContentAlignment.MiddleCenter,
 				Anchor = AnchorStyles.Top | AnchorStyles.Left
@@ -287,18 +286,18 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 					{
 						Title = "Intro", Items = new List<ChecklistItem>()
 						{
-							new ChecklistItem(){Text = "Wakeup", Checked = false},
-							new ChecklistItem(){Text = "Have breakfast", Checked = false},
-							new ChecklistItem(){Text = "Get dressed", Checked = false},
+							new ChecklistItem(){Title = "Wakeup", Checked = false},
+							new ChecklistItem(){Title = "Have breakfast", Checked = false},
+							new ChecklistItem(){Title = "Get dressed", Checked = false},
 						}
 					},
 					new CheckListSection()
 					{
 						Title = "At work", Items = new List<ChecklistItem>()
 						{
-							new ChecklistItem(){Text = "Start working", Checked = false},
-							new ChecklistItem(){Text = "Program a new feature", Checked = false},
-							new ChecklistItem(){Text = "Feel good", Checked = false},
+							new ChecklistItem(){Title = "Start working", Checked = false},
+							new ChecklistItem(){Title = "Program a new feature", Checked = false},
+							new ChecklistItem(){Title = "Feel good", Checked = false},
 						}
 					},
 
@@ -306,8 +305,8 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 					{
 						Title = "At home", Items = new List<ChecklistItem>()
 						{
-							new ChecklistItem(){Text = "Chill", Checked = false},
-							new ChecklistItem(){Text = "Be proud of yourself", Checked = false},
+							new ChecklistItem(){Title = "Chill", Checked = false},
+							new ChecklistItem(){Title = "Be proud of yourself", Checked = false},
 						}
 					},
 				}

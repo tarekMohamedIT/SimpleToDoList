@@ -6,6 +6,8 @@ using ToDoList.Core.Services;
 using ToDoList.CoreTests.Logging;
 using ToDoList.DataAccess.DataProviders;
 using ToDoList.DataAccess.Entities;
+using ToDoList.DataAccess.Repositories;
+using ToDoList.DataAccess.Repositories.Concrete;
 using ToDoList.Utils.Logging;
 
 namespace ToDoList.CoreTests
@@ -13,7 +15,7 @@ namespace ToDoList.CoreTests
 	[TestClass]
 	public class BasicNoteTest
 	{
-		private BaseCrudService<BaseNote> _notesService;
+		private NotesService<BaseNote> _notesService;
 
 		[TestInitialize]
 		public void Init()
@@ -24,10 +26,10 @@ namespace ToDoList.CoreTests
 			appServices.Register<IDataProvider<List<BaseNote>>>(
 				() => new MemoryDataProvider<List<BaseNote>>(new List<BaseNote>()));
 
-			appServices.Register<BaseCrudService<BaseNote>>(
-				() =>  BaseCrudService<BaseNote>.Create(appServices.Resolve<IDataProvider<List<BaseNote>>>()));
+			appServices.Register<IGenericRepository<BaseNote>>(
+				() => new NotesRepository<BaseNote>(appServices.Resolve<IDataProvider<List<BaseNote>>>()));
 
-			_notesService = appServices.Resolve<BaseCrudService<BaseNote>>();
+			_notesService = new NotesService<BaseNote>(appServices.Resolve<IGenericRepository<BaseNote>>());
 		}
 
 		[TestMethod]
@@ -55,17 +57,17 @@ namespace ToDoList.CoreTests
 				Title = "A simple note",
 				Items = new List<ChecklistItem>()
 				{
-					new ChecklistItem(){Text = "Wake up", Checked = false},
-					new ChecklistItem(){Text = "Breakfast", Checked = false},
-					new ChecklistItem(){Text = "Workout", Checked = false},
-					new ChecklistItem(){Text = "Go to work", Checked = false}
+					new ChecklistItem(){Title = "Wake up", Checked = false},
+					new ChecklistItem(){Title = "Breakfast", Checked = false},
+					new ChecklistItem(){Title = "Workout", Checked = false},
+					new ChecklistItem(){Title = "Go to work", Checked = false}
 				}
 			});
 		}
 
 		private void AssertIsInserted(BaseNote note)
 		{
-			var result = _notesService.Insert(note);
+			var result = _notesService.Add(note);
 
 			Assert.IsTrue(result.State == Utils.Results.ResultState.Success, result.Exception?.Message ?? "Success");
 		}

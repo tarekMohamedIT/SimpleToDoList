@@ -18,13 +18,18 @@ namespace ToDoList.WindowsFormApp.Forms
 	public partial class Form1 : Form
 	{
 		private INoteViewModel _currentNoteViewModel;
-		private BaseCrudService<BaseNote> _service;
+		private IGenericRepository<BaseNote> _repo;
+		private NotesService<BaseNote> _service;
 		public Form1()
 		{
 			InitializeComponent();
-			_service = AppServicesResolver.Current.Resolve<BaseCrudService<BaseNote>>();
+			List<BaseNote> notesList;
 
-			var notesList = _service.Table.ToList();
+			_repo = AppServicesResolver.Current.Resolve<IGenericRepository<BaseNote>>();
+
+			_service = new NotesService<BaseNote>(_repo);
+			notesList = _service.GetAll(null).ResultItem.ToList();
+
 			int count = 0;
 			foreach (var note in notesList)
 			{
@@ -40,7 +45,7 @@ namespace ToDoList.WindowsFormApp.Forms
 
 		private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			var note = _service.Table.ToList()[listBox1.SelectedIndex];
+			var note = _service.GetAll(null).ResultItem.ToList()[listBox1.SelectedIndex];
 
 			_currentNoteViewModel = NotesFactory.CreateViewModel(note);
 			_currentNoteViewModel.InitControl(flowLayoutPanel1);
@@ -50,7 +55,18 @@ namespace ToDoList.WindowsFormApp.Forms
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			var result = _service.Update(_currentNoteViewModel.Entity as BaseNote);
+			var entity = _currentNoteViewModel.Entity as BaseNote;
+
+			var result = entity.Id == 0 
+				? _service.Add(entity)
+				: _service.Update(entity);
+
+			result = _service.SaveChanges();
+			if (result.State != Utils.Results.ResultState.Success)
+			{
+				MessageBox.Show("Something has happened!");
+				return;
+			}
 		}
 
 		private void button2_Click(object sender, EventArgs e)
@@ -60,9 +76,17 @@ namespace ToDoList.WindowsFormApp.Forms
 
 			var note = NotesFactory.CreateNoteModel(addForm.selectedItem);
 
-			_service.Insert(note);
+			_service.Add(note);
+			var result = _service.SaveChanges();
+			if (result.State != Utils.Results.ResultState.Success)
+			{
+				MessageBox.Show("Something has happened!");
+				return;
+			}
+
 			listBox1.Items.Add(note.Id.ToString("D5"));
 			listBox1.SelectedIndex = note.Id;
 		}
+
 	}
 }

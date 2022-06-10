@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ToDoList.Utils.Results.Impl
 {
@@ -14,8 +10,22 @@ namespace ToDoList.Utils.Results.Impl
 
 	public class SimpleResult<T> : IResult<T>
 	{
+		private T _resultItem;
 		public ResultState State { get; set; }
-		public T ResultItem { get; set; }
+
+		public T ResultItem
+		{
+			get
+			{
+				if (Exception != null)
+				{
+					System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(Exception).Throw();
+				}
+
+				return _resultItem;
+			}
+			set => _resultItem = value;
+		}
 		public Exception Exception { get; set; }
 	}
 }

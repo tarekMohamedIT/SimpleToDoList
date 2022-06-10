@@ -1,15 +1,9 @@
 ﻿namespace ToDoList.DataAccess.Entities
 {
-	public class ChecklistItem
+	public class ChecklistItem : BaseNote
 	{
-		/// <summary>
-		/// The text of the item.
-		/// </summary>
-		public string Text { get; set; }
-
-		/// <summary>
-		/// A bool to check whether this item is done or not.
-		/// </summary>
+		public int NoteId { get; set; }
+		public int SectionId { get; set; }
 		public bool Checked { get; set; }
 	}
 }

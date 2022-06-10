@@ -20,7 +20,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 				{
 					_entity.Items.Add(new ChecklistItem()
 					{
-						Text = checkListControl.ToString(),
+						Title = checkListControl.ToString(),
 						Checked = _checkListControl.GetItemCheckState(count++) == CheckState.Checked
 					});
 				}
@@ -48,7 +48,7 @@ namespace ToDoList.WindowsFormApp.Models.ViewModels
 
 			foreach (var checklistItem in _entity.Items)
 			{
-				_checkListControl.Items.Add(checklistItem.Text, checklistItem.Checked);
+				_checkListControl.Items.Add(checklistItem.Title, checklistItem.Checked);
 			}
 
 			container.Controls.Add(_checkListControl);
