@@ -13,6 +13,12 @@ namespace ToDoList.Utils.Results.Impl
 		private T _resultItem;
 		public ResultState State { get; set; }
 
+		public static implicit operator SimpleResult<T>(T item) => new SimpleResult<T>
+		{
+			State = ResultState.Success,
+			ResultItem = item
+		};
+	
 		public T ResultItem
 		{
 			get

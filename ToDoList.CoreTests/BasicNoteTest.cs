@@ -13,7 +13,7 @@ using ToDoList.Utils.Logging;
 namespace ToDoList.CoreTests
 {
 	[TestClass]
-	public class BasicNoteTest
+	public class BasicNoteTest : BaseTesting
 	{
 		private NotesService<BaseNote> _notesService;
 
@@ -26,7 +26,7 @@ namespace ToDoList.CoreTests
 			appServices.Register<IDataProvider<List<BaseNote>>>(
 				() => new MemoryDataProvider<List<BaseNote>>(new List<BaseNote>()));
 
-			appServices.Register<IGenericRepository<BaseNote>>(
+			appServices.Register("BaseNotesRepository",
 				() => new NotesRepository<BaseNote>(appServices.Resolve<IDataProvider<List<BaseNote>>>()));
 
 			_notesService = new NotesService<BaseNote>(appServices.Resolve<IGenericRepository<BaseNote>>());
@@ -35,7 +35,7 @@ namespace ToDoList.CoreTests
 		[TestMethod]
 		public void Notes_AreInserted_Success()
 		{
-			AssertIsInserted(new Note()
+			AssertInserted(new Note()
 			{
 				Id = 0,
 				Title = "A simple note",
@@ -43,7 +43,7 @@ namespace ToDoList.CoreTests
 				CreationDate = DateTime.Now
 			});
 
-			AssertIsInserted(new Note()
+			AssertInserted(new Note()
 			{
 				Id = 1,
 				Title = "A simple note",
@@ -51,7 +51,7 @@ namespace ToDoList.CoreTests
 				CreationDate = DateTime.Now
 			});
 
-			AssertIsInserted(new CheckList()
+			AssertInserted(new CheckList()
 			{
 				Id = 0,
 				Title = "A simple note",
@@ -65,11 +65,10 @@ namespace ToDoList.CoreTests
 			});
 		}
 
-		private void AssertIsInserted(BaseNote note)
+		private void AssertInserted(BaseNote note)
 		{
 			var result = _notesService.Add(note);
-
-			Assert.IsTrue(result.State == Utils.Results.ResultState.Success, result.Exception?.Message ?? "Success");
+			AssertTrue(result);
 		}
 	}
 }

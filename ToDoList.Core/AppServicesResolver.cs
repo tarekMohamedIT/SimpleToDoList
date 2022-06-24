@@ -10,12 +10,12 @@ namespace ToDoList.Core
 	public class AppServicesResolver
 	{
 		private static AppServicesResolver _instance;
-		private IDictionary<Type, Func<object>> factories;
+		private IDictionary<string, Func<object>> factories;
 		public static AppServicesResolver Current => _instance ?? (_instance = new AppServicesResolver());
 
 		public AppServicesResolver()
 		{
-			factories = new ConcurrentDictionary<Type, Func<object>>();
+			factories = new ConcurrentDictionary<string, Func<object>>();
 		}
 
 		public AppServicesResolver Register<T>(Func<object> creationFactory) where T : class
@@ -25,8 +25,15 @@ namespace ToDoList.Core
 
 		public AppServicesResolver Register(Type type, Func<object> creationFactory)
 		{
-			if (factories.ContainsKey(type)) factories[type] = creationFactory;
-			else factories.Add(type, creationFactory);
+			var typeName = type.FullName;
+			return Register(typeName, creationFactory);
+		}
+
+
+		public AppServicesResolver Register(string typeName, Func<object> creationFactory)
+		{
+			if (factories.ContainsKey(typeName)) factories[typeName] = creationFactory;
+			else factories.Add(typeName, creationFactory);
 
 			return this;
 		}
@@ -38,7 +45,13 @@ namespace ToDoList.Core
 
 		public object Resolve(Type type)
 		{
-			if (factories.ContainsKey(type)) return factories[type].Invoke();
+			var typeName = type.FullName;
+			return Resolve(typeName);
+		}
+
+		public object Resolve(string typeName)
+		{
+			if (factories.ContainsKey(typeName)) return factories[typeName].Invoke();
 
 			return null;
 		}

@@ -76,6 +76,7 @@
     <Compile Include="AppServicesResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseCrudService.cs" />
+    <Compile Include="Services\ChecklistNoteService.cs" />
     <Compile Include="Services\NotesService.cs" />
   </ItemGroup>
   <ItemGroup>
